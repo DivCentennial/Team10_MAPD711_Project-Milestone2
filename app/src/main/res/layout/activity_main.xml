@@ -13,7 +13,7 @@
         android:layout_width="218dp"
         android:layout_height="46dp"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="63dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="97dp"
         android:backgroundTint="@color/white"
         android:text="Order now!  🤩"
@@ -27,15 +27,15 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="349dp"
-        android:layout_height="332dp"
+        android:layout_width="352dp"
+        android:layout_height="331dp"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="103dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="31dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Cenphone" />
+        app:srcCompat="@drawable/cenphone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
