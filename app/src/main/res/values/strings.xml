@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Team10_MAPD711_Project-Milestone2</string>
+    <string-array name="brands">
+        <item>Samsung</item>
+        <item>Google Pixel</item>
+        <item>iphone</item>
+    </string-array>
 </resources>
