@@ -3,6 +3,6 @@
     <string-array name="brands">
         <item>Samsung</item>
         <item>Google Pixel</item>
-        <item>iphone</item>
+        <item>iPhone</item>
     </string-array>
 </resources>

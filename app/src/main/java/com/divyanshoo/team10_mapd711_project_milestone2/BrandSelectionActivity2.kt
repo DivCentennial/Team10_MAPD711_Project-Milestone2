@@ -1,8 +1,11 @@
+//  BrandSelectionActivity2.kt
 package com.divyanshoo.team10_mapd711_project_milestone2
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
@@ -25,7 +28,7 @@ class BrandSelectionActivity2 : AppCompatActivity() {
             insets
         }
 
-        // Initialize the Spinner and ImageView
+        // Initialize Spinner and ImageView
         val spinner: Spinner = findViewById(R.id.spinner)
         phoneImage = findViewById(R.id.phoneImage)
 
@@ -33,15 +36,22 @@ class BrandSelectionActivity2 : AppCompatActivity() {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when (position) {
-                    0 -> phoneImage.setImageResource(R.drawable.samsung_image)      // Samsung
+                    0 -> phoneImage.setImageResource(R.drawable.samsung_image) // Samsung
                     1 -> phoneImage.setImageResource(R.drawable.google_pixel_image) // Google Pixel
-                    2 -> phoneImage.setImageResource(R.drawable.iphone_image)       // iPhone
+                    2 -> phoneImage.setImageResource(R.drawable.iphone_image) // iPhone
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Optional: Handle case where nothing is selected
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        // Handle Proceed button click
+        val proceedButton: Button = findViewById(R.id.button)
+        proceedButton.setOnClickListener {
+            val selectedBrand = spinner.selectedItem.toString()
+            val intent = Intent(this, ModelSelection3::class.java)
+            intent.putExtra("SELECTED_BRAND", selectedBrand)
+            startActivity(intent)
         }
     }
 }
