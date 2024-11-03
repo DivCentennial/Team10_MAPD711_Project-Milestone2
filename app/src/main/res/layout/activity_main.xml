@@ -16,7 +16,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="97dp"
         android:backgroundTint="@color/white"
-        android:text="Order now!  🤩"
+        android:text="Order now !  🤩"
         android:textColor="#BF387D"
         android:textSize="20sp"
         android:textStyle="bold"

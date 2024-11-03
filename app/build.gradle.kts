@@ -1,3 +1,5 @@
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,6 +8,7 @@ plugins {
 android {
     namespace = "com.divyanshoo.team10_mapd711_project_milestone2"
     compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.divyanshoo.team10_mapd711_project_milestone2"
@@ -33,7 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
 }
+
 
 dependencies {
 
