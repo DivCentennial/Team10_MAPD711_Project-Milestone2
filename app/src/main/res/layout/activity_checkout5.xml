@@ -63,6 +63,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storageTextView" />
 
+    <!-- New TextView for price -->
+    <TextView
+        android:id="@+id/priceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Price: "
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colorTextView" />
+
     <!-- Confirm Button -->
     <Button
         android:id="@+id/confirmButton"
@@ -74,6 +86,6 @@
         android:textColor="#BF387D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/priceTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,3 @@
-//ColorSelection4.kt
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.content.Intent
@@ -8,10 +7,10 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.activity.enableEdgeToEdge
 
 class ColorSelection4 : AppCompatActivity() {
 
@@ -37,15 +36,17 @@ class ColorSelection4 : AppCompatActivity() {
         // Set "Blue 💙" as the default selected item
         colorSpinner.setSelection(0)
 
-        // Get the selected phone details from the previous screens via Intent
+        // Get the selected phone details from the previous screen via Intent
         val selectedBrand = intent.getStringExtra("SELECTED_BRAND")
         val selectedModel = intent.getStringExtra("SELECTED_MODEL")
+        val selectedPrice = intent.getStringExtra("SELECTED_PRICE")
         val selectedStorage = intent.getStringExtra("SELECTED_STORAGE")
 
         // Log the received data for debugging
         Log.d("ColorSelection4", "Selected Brand: $selectedBrand")
         Log.d("ColorSelection4", "Selected Model: $selectedModel")
         Log.d("ColorSelection4", "Selected Storage: $selectedStorage")
+        Log.d("ColorSelection4", "Selected Price: $selectedPrice")
 
         // Set up the "Next" button to pass the data to CheckoutActivity
         val nextButton: Button = findViewById(R.id.checkoutButton)
@@ -56,14 +57,21 @@ class ColorSelection4 : AppCompatActivity() {
             // Log the selected color for debugging
             Log.d("ColorSelection4", "Selected Color: $selectedColor")
 
+            // Validate that a color is selected
+            if (selectedColor.isEmpty()) {
+                Toast.makeText(this, "Please select a color", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             // Create an Intent to pass data to CheckoutActivity
             val intent = Intent(this, CheckoutActivity5::class.java)
 
             // Pass all selected data via the Intent
-            intent.putExtra("selectedBrand", selectedBrand)
-            intent.putExtra("selectedModel", selectedModel)
-            intent.putExtra("selectedStorage", selectedStorage)
-            intent.putExtra("selectedColor", selectedColor)
+            intent.putExtra("SELECTED_BRAND", selectedBrand)
+            intent.putExtra("SELECTED_MODEL", selectedModel)
+            intent.putExtra("SELECTED_PRICE", selectedPrice)
+            intent.putExtra("SELECTED_STORAGE", selectedStorage)
+            intent.putExtra("SELECTED_COLOR", selectedColor)
 
             // Start the CheckoutActivity
             startActivity(intent)
