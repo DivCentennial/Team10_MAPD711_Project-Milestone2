@@ -1,6 +1,7 @@
 //CustomerInfoActivity6.kt
 package com.divyanshoo.team10_mapd711_project_milestone2
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Button
@@ -18,10 +19,13 @@ class CustomerInfoActivity6 : AppCompatActivity() {
         val selectedModel = intent.getStringExtra("selectedModel")
         val selectedStorage = intent.getStringExtra("selectedStorage")
         val selectedColor = intent.getStringExtra("selectedColor")
+        val selectedPrice = intent.getStringExtra("selectedPrice")
 
         // Initialize EditTexts for user input
         val fullNameEditText: EditText = findViewById(R.id.fullNameEditText)
-        val addressEditText: EditText = findViewById(R.id.addressEditText)
+        val streetNameEditText: EditText = findViewById(R.id.streetNameEditText)
+        val cityEditText: EditText = findViewById(R.id.cityEditText)
+        val postalCodeEditText: EditText = findViewById(R.id.postalCodeEditText)
         val phoneEditText: EditText = findViewById(R.id.phoneEditText)
         val emailEditText: EditText = findViewById(R.id.emailEditText)
 
@@ -30,16 +34,31 @@ class CustomerInfoActivity6 : AppCompatActivity() {
         submitButton.setOnClickListener {
             // Capture the user inputs
             val fullName = fullNameEditText.text.toString()
-            val address = addressEditText.text.toString()
+            val streetName = streetNameEditText.text.toString()
+            val city = cityEditText.text.toString()
+            val postalCode = postalCodeEditText.text.toString()
             val phone = phoneEditText.text.toString()
             val email = emailEditText.text.toString()
 
             // Validate the user input
-            if (fullName.isNotEmpty() && address.isNotEmpty() && phone.isNotEmpty() && email.isNotEmpty()) {
-                // Proceed with the order and show a confirmation message
-                Toast.makeText(this, "Order confirmed for $fullName!", Toast.LENGTH_SHORT).show()
+            if (fullName.isNotEmpty() && streetName.isNotEmpty() && city.isNotEmpty() &&
+                postalCode.isNotEmpty() && phone.isNotEmpty() && email.isNotEmpty()) {
 
-                // Optionally, you can pass all the collected data to another activity (e.g., confirmation screen)
+                // Proceed to the PaymentInfoActivity and pass the collected data
+                val intent = Intent(this, PaymentInfoActivity7::class.java)
+                intent.putExtra("fullName", fullName)
+                intent.putExtra("streetName", streetName)
+                intent.putExtra("city", city)
+                intent.putExtra("postalCode", postalCode)
+                intent.putExtra("phone", phone)
+                intent.putExtra("email", email)
+                intent.putExtra("selectedBrand", selectedBrand)
+                intent.putExtra("selectedModel", selectedModel)
+                intent.putExtra("selectedStorage", selectedStorage)
+                intent.putExtra("selectedColor", selectedColor)
+                intent.putExtra("selectedPrice", selectedPrice)
+                startActivity(intent)
+
             } else {
                 // Show a toast message if any field is empty
                 Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
