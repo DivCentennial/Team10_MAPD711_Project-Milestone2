@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class PhoneModelAdapter(private val phoneModels: List<PhoneModel>) : RecyclerView.Adapter<PhoneModelAdapter.ViewHolder>() {
+class PhoneModelAdapter(
+    private val phoneModels: List<PhoneModel>,
+    private val onItemClick: (PhoneModel) -> Unit // Lambda for item click handling
+) : RecyclerView.Adapter<PhoneModelAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val modelName: TextView = itemView.findViewById(R.id.modelName)
@@ -23,6 +26,11 @@ class PhoneModelAdapter(private val phoneModels: List<PhoneModel>) : RecyclerVie
         val phoneModel = phoneModels[position]
         holder.modelName.text = phoneModel.name
         holder.modelPrice.text = phoneModel.price
+
+        // Set up the click listener for each item
+        holder.itemView.setOnClickListener {
+            onItemClick(phoneModel) // Pass the clicked item to the lambda
+        }
     }
 
     override fun getItemCount(): Int {

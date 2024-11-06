@@ -12,7 +12,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select your model ! 📲"
+        android:text="Click to Select model ! 📲"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,13 +20,78 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="356dp"
-        android:layout_height="314dp"
+        android:layout_height="316dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/selectedModelTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/selectedModelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selected Model: None"
+        android:textColor="@color/design_default_color_primary_variant"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroupStorage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupStorage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/selectedModelTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <RadioButton
+            android:id="@+id/radio_64gb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="64 GB"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/radio_128gb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="128 GB"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/radio_256gb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="256 GB"
+            android:textColor="@color/white" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="99dp"
+        android:backgroundTint="@color/white"
+        android:text="Select Color 🌈➡"
+        android:textColor="#BF387D"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupStorage" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
