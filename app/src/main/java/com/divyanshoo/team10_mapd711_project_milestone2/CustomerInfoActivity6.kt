@@ -15,11 +15,11 @@ class CustomerInfoActivity6 : AppCompatActivity() {
         setContentView(R.layout.activity_customer_info6)
 
         // Retrieve selected phone details from the Intent (if passed)
-        val selectedBrand = intent.getStringExtra("selectedBrand")
-        val selectedModel = intent.getStringExtra("selectedModel")
-        val selectedStorage = intent.getStringExtra("selectedStorage")
-        val selectedColor = intent.getStringExtra("selectedColor")
-        val selectedPrice = intent.getStringExtra("selectedPrice")
+        val selectedBrand = intent.getStringExtra("SELECTED_BRAND")
+        val selectedModel = intent.getStringExtra("SELECTED_MODEL")
+        val selectedStorage = intent.getStringExtra("SELECTED_STORAGE")
+        val selectedColor = intent.getStringExtra("SELECTED_COLOR")
+        val selectedPrice = intent.getStringExtra("SELECTED_PRICE")
 
         // Initialize EditTexts for user input
         val fullNameEditText: EditText = findViewById(R.id.fullNameEditText)
@@ -52,10 +52,10 @@ class CustomerInfoActivity6 : AppCompatActivity() {
                 intent.putExtra("postalCode", postalCode)
                 intent.putExtra("phone", phone)
                 intent.putExtra("email", email)
-                intent.putExtra("selectedBrand", selectedBrand)
-                intent.putExtra("selectedModel", selectedModel)
-                intent.putExtra("selectedStorage", selectedStorage)
-                intent.putExtra("selectedColor", selectedColor)
+                intent.putExtra("SELECTED_BRAND", selectedBrand)
+                intent.putExtra("SELECTED_MODEL", selectedModel)
+                intent.putExtra("SELECTED_STORAGE", selectedStorage)
+                intent.putExtra("SELECTED_COLOR", selectedColor)
                 intent.putExtra("selectedPrice", selectedPrice)
                 startActivity(intent)
 

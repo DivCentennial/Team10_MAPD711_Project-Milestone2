@@ -31,6 +31,14 @@ class CheckoutActivity5 : AppCompatActivity() {
         confirmButton.setOnClickListener {
             // Navigate to Customer Information Activity
             val intent = Intent(this, CustomerInfoActivity6::class.java)
+
+            // Pass all selected data via the Intent
+            intent.putExtra("SELECTED_BRAND", selectedBrand)
+            intent.putExtra("SELECTED_MODEL", selectedModel)
+            intent.putExtra("SELECTED_PRICE", selectedPrice)
+            intent.putExtra("SELECTED_STORAGE", selectedStorage)
+            intent.putExtra("SELECTED_COLOR", selectedColor)
+
             startActivity(intent)
         }
     }
