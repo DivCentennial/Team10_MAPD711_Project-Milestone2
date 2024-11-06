@@ -32,20 +32,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- RadioGroup for selecting payment method -->
-
-    <!-- Card details input fields (initially hidden) -->
     <RadioGroup
         android:id="@+id/paymentMethodRadioGroup"
-        android:layout_width="143dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView3">
+        android:layout_marginTop="40dp">
 
-        <!-- RadioButton for Credit Card -->
-
-        <!-- RadioButton for Debit Card -->
         <RadioButton
             android:id="@+id/radioCreditCard"
             android:layout_width="wrap_content"
@@ -60,7 +55,6 @@
             android:text="Debit Card 💳"
             android:textColor="@color/white" />
 
-        <!-- RadioButton for Apple Pay -->
         <RadioButton
             android:id="@+id/radioApplePay"
             android:layout_width="wrap_content"
@@ -68,7 +62,6 @@
             android:text="Apple Pay 🍎"
             android:textColor="@color/white" />
 
-        <!-- RadioButton for Google Pay -->
         <RadioButton
             android:id="@+id/radioGooglePay"
             android:layout_width="wrap_content"
@@ -77,34 +70,32 @@
             android:textColor="@color/white" />
     </RadioGroup>
 
-    <LinearLayout
-        android:id="@+id/cardDetailsLayout"
-        android:layout_width="37dp"
-        android:layout_height="23dp"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
+    <!-- Card details input fields (initially hidden) -->
+    <EditText
+        android:id="@+id/cardNumberEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:hint="Card Number"
+        android:inputType="text"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/paymentMethodRadioGroup"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
 
-        <EditText
-            android:id="@+id/cardNumberEditText"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Card Number"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/expiryDateEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Expiry Date (MM/YY)"
-            android:inputType="text" />
-    </LinearLayout>
+    <EditText
+        android:id="@+id/expiryDateEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:hint="Expiry Date (MM/YY)"
+        android:inputType="text"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/cardNumberEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/submitButton2"

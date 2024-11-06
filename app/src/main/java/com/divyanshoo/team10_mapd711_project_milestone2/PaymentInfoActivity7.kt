@@ -16,11 +16,13 @@ class PaymentInfoActivity7 : AppCompatActivity() {
         setContentView(R.layout.activity_payment_info7)
 
         val paymentMethodRadioGroup: RadioGroup = findViewById(R.id.paymentMethodRadioGroup)
-        val cardDetailsLayout: View = findViewById(R.id.cardDetailsLayout)
+        val cardNumberEditText: EditText = findViewById(R.id.cardNumberEditText)
+        val expiryDateEditText: EditText = findViewById(R.id.expiryDateEditText)
         val submitButton: Button = findViewById(R.id.submitButton2)
 
-        // Initially, set card details layout to be hidden
-        cardDetailsLayout.visibility = View.GONE
+        // Initially, hide the card details input fields
+        cardNumberEditText.visibility = View.GONE
+        expiryDateEditText.visibility = View.GONE
 
         // Set up a listener to handle payment method selection
         paymentMethodRadioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -29,10 +31,12 @@ class PaymentInfoActivity7 : AppCompatActivity() {
 
             // Show card details input fields if Credit or Debit is selected
             if (paymentMethodText == "Credit Card 💳" || paymentMethodText == "Debit Card 💳") {
-                cardDetailsLayout.visibility = View.VISIBLE
+                cardNumberEditText.visibility = View.VISIBLE
+                expiryDateEditText.visibility = View.VISIBLE
             } else {
                 // Hide card details input fields if Apple Pay or Google Pay is selected
-                cardDetailsLayout.visibility = View.GONE
+                cardNumberEditText.visibility = View.GONE
+                expiryDateEditText.visibility = View.GONE
             }
         }
 
@@ -45,8 +49,8 @@ class PaymentInfoActivity7 : AppCompatActivity() {
 
             if (paymentMethod == "Credit Card 💳" || paymentMethod == "Debit Card 💳") {
                 // Get card details
-                val cardNumber = findViewById<EditText>(R.id.cardNumberEditText).text.toString()
-                val expiryDate = findViewById<EditText>(R.id.expiryDateEditText).text.toString()
+                val cardNumber = cardNumberEditText.text.toString()
+                val expiryDate = expiryDateEditText.text.toString()
 
                 if (cardNumber.isEmpty() || expiryDate.isEmpty()) {
                     Toast.makeText(this, "Please fill in card details.", Toast.LENGTH_SHORT).show()
@@ -59,3 +63,4 @@ class PaymentInfoActivity7 : AppCompatActivity() {
         }
     }
 }
+
