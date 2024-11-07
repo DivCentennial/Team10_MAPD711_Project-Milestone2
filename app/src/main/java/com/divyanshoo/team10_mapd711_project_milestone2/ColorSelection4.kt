@@ -1,3 +1,6 @@
+//color_selection4.kt
+
+// View description: User can select desired color.
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.content.Intent
@@ -36,7 +39,7 @@ class ColorSelection4 : AppCompatActivity() {
         // Set "Blue 💙" as the default selected item
         colorSpinner.setSelection(0)
 
-        // Get the selected phone details from the previous screen via Intent
+        // Gets the selected phone details from the previous screen via Intent
         val selectedBrand = intent.getStringExtra("SELECTED_BRAND")
         val selectedModel = intent.getStringExtra("SELECTED_MODEL")
         val selectedPrice = intent.getStringExtra("SELECTED_PRICE")

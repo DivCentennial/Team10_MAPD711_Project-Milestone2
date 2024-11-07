@@ -1,4 +1,6 @@
 //OrderConfirmation8.kt
+
+// View description: User can see the order confirmation phone details, customer information, and payment method.
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.os.Bundle

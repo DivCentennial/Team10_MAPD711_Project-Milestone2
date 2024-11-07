@@ -1,4 +1,6 @@
 //PaymentInfoActivity7.kt
+
+// View description: User can select payment method and enter card details.
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.content.Intent
@@ -60,7 +62,7 @@ class PaymentInfoActivity7 : AppCompatActivity() {
                 }
             }
 
-            // Assuming you've already retrieved the previous details such as phone details, customer info, etc.
+
             // Retrieving the passed data
             val customerName = intent.getStringExtra("fullName")
             val streetName = intent.getStringExtra("streetName")
