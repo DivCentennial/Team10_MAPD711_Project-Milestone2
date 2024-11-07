@@ -1,4 +1,5 @@
 //  BrandSelectionActivity2.kt
+// View description: User can select desired brands.
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.content.Intent
@@ -45,7 +46,7 @@ class BrandSelectionActivity2 : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        // Handle Proceed button click
+        // Handle Proceed button click to navigate to ModelSelection3.kt
         val proceedButton: Button = findViewById(R.id.button)
         proceedButton.setOnClickListener {
             val selectedBrand = spinner.selectedItem.toString()

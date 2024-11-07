@@ -72,6 +72,8 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             val phoneStorage = intent.getStringExtra("SELECTED_STORAGE")
             val phoneColor = intent.getStringExtra("SELECTED_COLOR")
             val phonePrice = intent.getStringExtra("selectedPrice")
+            val email = intent.getStringExtra("email")
+            val phone = intent.getStringExtra("phone")
 
             // Create an Intent to navigate to OrderConfirmation8
             val intent = Intent(this, OrderConfirmation8::class.java)
@@ -84,6 +86,9 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             intent.putExtra("phoneColor", phoneColor)
             intent.putExtra("customerName", customerName)
             intent.putExtra("deliveryAddress", deliveryAddress)
+            intent.putExtra("email", email)
+            intent.putExtra("phone", phone)
+            intent.putExtra("paymentMethod", paymentMethod)
 
             // Start the OrderConfirmation8 activity
             startActivity(intent)

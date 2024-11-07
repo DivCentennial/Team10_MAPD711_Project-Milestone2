@@ -18,7 +18,9 @@ class OrderConfirmation8 : AppCompatActivity() {
         val phoneColor = intent.getStringExtra("phoneColor")
         val customerName = intent.getStringExtra("customerName")
         val deliveryAddress = intent.getStringExtra("deliveryAddress")
-
+        val email = intent.getStringExtra("email")
+        val phone = intent.getStringExtra("phone")
+        val paymentMethod = intent.getStringExtra("paymentMethod")
         // Initializing the TextViews to display the order information
         val orderSummaryTextView: TextView = findViewById(R.id.orderSummaryTextView)
         val customerInfoTextView: TextView = findViewById(R.id.customerInfoTextView)
@@ -36,6 +38,9 @@ class OrderConfirmation8 : AppCompatActivity() {
         customerInfoTextView.text = """
             Customer Name: $customerName
             Delivery Address: $deliveryAddress
+            Email: $email
+            Phone No: $phone
+            Payment Method: $paymentMethod
         """.trimIndent()
     }
 }
