@@ -1,4 +1,6 @@
 // ModelSelection3.kt
+
+// View description: User can select desired model.
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.os.Bundle
@@ -13,9 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class ModelSelection3 : AppCompatActivity() {
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var phoneModelAdapter: PhoneModelAdapter
-    private lateinit var phoneModels: List<PhoneModel>
+    private lateinit var recyclerView: RecyclerView // RecyclerView to display phone models
+    private lateinit var phoneModelAdapter: PhoneModelAdapter // Adapter for RecyclerView
+    private lateinit var phoneModels: List<PhoneModel> // List of available phone models
     private var selectedModel: PhoneModel? = null // Holds the selected model
 
     override fun onCreate(savedInstanceState: Bundle?) {

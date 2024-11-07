@@ -1,4 +1,6 @@
 //OrderConfirmation8.kt
+
+// View description: User can see the order confirmation phone details, customer information, and payment method.
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.content.Intent
@@ -20,7 +22,9 @@ class OrderConfirmation8 : AppCompatActivity() {
         val phoneColor = intent.getStringExtra("phoneColor")
         val customerName = intent.getStringExtra("customerName")
         val deliveryAddress = intent.getStringExtra("deliveryAddress")
-
+        val email = intent.getStringExtra("email")
+        val phone = intent.getStringExtra("phone")
+        val paymentMethod = intent.getStringExtra("paymentMethod")
         // Initializing the TextViews to display the order information
         val orderSummaryTextView: TextView = findViewById(R.id.orderSummaryTextView)
         val customerInfoTextView: TextView = findViewById(R.id.customerInfoTextView)
@@ -38,6 +42,9 @@ class OrderConfirmation8 : AppCompatActivity() {
         customerInfoTextView.text = """
             Customer Name: $customerName
             Delivery Address: $deliveryAddress
+            Email: $email
+            Phone No: $phone
+            Payment Method: $paymentMethod
         """.trimIndent()
 
         //adding return to home page functionality

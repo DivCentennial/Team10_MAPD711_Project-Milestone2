@@ -1,3 +1,6 @@
+//checkout_activity5.kt
+// View description: User can see the selected phone details and confirm the order.
+
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.content.Intent

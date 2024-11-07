@@ -1,4 +1,5 @@
 //CustomerInfoActivity6.kt
+// View description: User can enter customer information.
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.content.Intent
@@ -14,7 +15,7 @@ class CustomerInfoActivity6 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_info6)
 
-        // Retrieve selected phone details from the Intent (if passed)
+        // Retrieve selected phone details from the Intent
         val selectedBrand = intent.getStringExtra("SELECTED_BRAND")
         val selectedModel = intent.getStringExtra("SELECTED_MODEL")
         val selectedStorage = intent.getStringExtra("SELECTED_STORAGE")

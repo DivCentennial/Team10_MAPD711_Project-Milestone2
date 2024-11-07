@@ -1,4 +1,6 @@
 //PaymentInfoActivity7.kt
+
+// View description: User can select payment method and enter card details.
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.content.Intent
@@ -60,7 +62,7 @@ class PaymentInfoActivity7 : AppCompatActivity() {
                 }
             }
 
-            // Assuming you've already retrieved the previous details such as phone details, customer info, etc.
+
             // Retrieving the passed data
             val customerName = intent.getStringExtra("fullName")
             val streetName = intent.getStringExtra("streetName")
@@ -72,6 +74,8 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             val phoneStorage = intent.getStringExtra("SELECTED_STORAGE")
             val phoneColor = intent.getStringExtra("SELECTED_COLOR")
             val phonePrice = intent.getStringExtra("selectedPrice")
+            val email = intent.getStringExtra("email")
+            val phone = intent.getStringExtra("phone")
 
             // Create an Intent to navigate to OrderConfirmation8
             val intent = Intent(this, OrderConfirmation8::class.java)
@@ -84,6 +88,9 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             intent.putExtra("phoneColor", phoneColor)
             intent.putExtra("customerName", customerName)
             intent.putExtra("deliveryAddress", deliveryAddress)
+            intent.putExtra("email", email)
+            intent.putExtra("phone", phone)
+            intent.putExtra("paymentMethod", paymentMethod)
 
             // Start the OrderConfirmation8 activity
             startActivity(intent)
