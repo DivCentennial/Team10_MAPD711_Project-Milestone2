@@ -19,150 +19,165 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Full Name Label -->
-    <TextView
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <!-- Full Name -->
+    <TextView
+        android:id="@+id/fullNameLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Enter Full Name"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
-    <!-- Full Name Input -->
     <EditText
         android:id="@+id/fullNameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:hint="Full Name"
         android:inputType="textPersonName"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/fullNameLabel" />
 
-    <!-- Street Name Label -->
+    <!-- Street Name -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/streetNameLabel"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Enter Street Name"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/fullNameEditText"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fullNameEditText" />
 
-    <!-- Street Name Input -->
     <EditText
         android:id="@+id/streetNameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:hint="Street Name"
         android:inputType="text"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fullNameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/streetNameLabel" />
 
-    <!-- City Label -->
+    <!-- City and Postal Code -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/cityLabel"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Enter City"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/streetNameEditText"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/streetNameEditText" />
 
-    <!-- City Input -->
     <EditText
         android:id="@+id/cityEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:hint="City"
-        android:textColor="@color/white"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/streetNameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/cityLabel" />
 
-    <!-- Postal Code Label -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/postalCodeLabel"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Enter Postal Code"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/cityEditText"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/streetNameEditText" />
 
-    <!-- Postal Code Input -->
     <EditText
         android:id="@+id/postalCodeEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:hint="Postal Code"
         android:inputType="textPostalAddress"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cityEditText" />
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/postalCodeLabel" />
 
-    <!-- Phone Number Label -->
+
+    <!-- Phone and Email -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/phoneLabel"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Enter Phone Number"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/postalCodeEditText"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityEditText" />
 
-    <!-- Phone Number Input -->
     <EditText
         android:id="@+id/phoneEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:hint="Phone Number"
         android:inputType="phone"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/postalCodeEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/phoneLabel" />
 
-    <!-- Email Address Label -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/emailLabel"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Enter Email Address"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/phoneEditText"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/postalCodeEditText" />
 
-    <!-- Email Address Input -->
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:hint="Email Address"
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phoneEditText" />
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/emailLabel" />
+
 
     <!-- Submit Button -->
     <Button
         android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/white"
         android:text="Submit"
         android:textColor="#BF387D"
-        android:backgroundTint="@color/white"
         app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+        app:layout_constraintTop_toBottomOf="@id/emailEditText"
+        app:layout_constraintWidth_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

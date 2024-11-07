@@ -3,19 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="?attr/selectableItemBackground"
+    android:backgroundTint="@color/pink_complimentary"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    android:backgroundTintMode="src_in">
 
-    <TextView
-        android:id="@+id/modelName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+<TextView
+android:id="@+id/modelName"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:textColor="@android:color/white"
+android:textSize="18sp"
+android:paddingBottom="4dp" />
 
-    <TextView
-        android:id="@+id/modelPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
-</LinearLayout>
+<TextView
+android:id="@+id/modelPrice"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:textColor="@android:color/white"
+android:textSize="16sp" />
+    </LinearLayout>

@@ -1,7 +1,9 @@
 //OrderConfirmation8.kt
 package com.divyanshoo.team10_mapd711_project_milestone2
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -37,5 +39,13 @@ class OrderConfirmation8 : AppCompatActivity() {
             Customer Name: $customerName
             Delivery Address: $deliveryAddress
         """.trimIndent()
+
+        //adding return to home page functionality
+        val homeButton: Button = findViewById(R.id.homeButton)
+        homeButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }
