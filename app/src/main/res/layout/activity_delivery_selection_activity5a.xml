@@ -1,12 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#BF387D"
-    >
+    android:background="#BF387D">
 
+    <fragment
+        android:id="@+id/mapFragment"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="396dp"
+        android:layout_height="252dp" />
 
     <Spinner
         android:id="@+id/deliverySpinner"
@@ -15,9 +18,7 @@
         android:textColor="@color/white"
         android:background="@drawable/spinner_border"
         android:spinnerMode="dropdown"
-        android:paddingEnd="20dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
+        android:paddingEnd="20dp" />
 
     <Button
         android:id="@+id/proceedButton"
@@ -27,5 +28,30 @@
         android:text="Proceed"
         android:textColor="#BF387D" />
 
+    <!-- Campus selection Spinner (hidden initially) -->
+    <Button
+        android:id="@+id/proceedtocustomerinfoButton"
+        android:layout_width="30dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/white"
+        android:text="Proceed"
+        android:textColor="#BF387D"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/campusSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <!-- Map Fragment container (hidden initially) -->
+    <FrameLayout
+        android:id="@+id/mapFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="gone">
+
+    </FrameLayout>
 
 </LinearLayout>
