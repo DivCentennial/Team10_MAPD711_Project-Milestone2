@@ -71,14 +71,14 @@
             android:id="@+id/radio_128gb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="128 GB"
+            android:text="128 GB(+$30)"
             android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radio_256gb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="256 GB"
+            android:text="256 GB(+$50)"
             android:textColor="@color/white" />
     </RadioGroup>
 
