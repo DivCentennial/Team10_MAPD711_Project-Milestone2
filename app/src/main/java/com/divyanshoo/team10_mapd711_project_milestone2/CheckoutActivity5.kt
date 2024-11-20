@@ -33,7 +33,7 @@ class CheckoutActivity5 : AppCompatActivity() {
         val confirmButton: Button = findViewById(R.id.confirmButton)
         confirmButton.setOnClickListener {
             // Navigate to Customer Information Activity
-            val intent = Intent(this, CustomerInfoActivity6::class.java)
+            val intent = Intent(this, DeliverySelectionActivity5a::class.java)
 
             // Pass all selected data via the Intent
             intent.putExtra("SELECTED_BRAND", selectedBrand)

@@ -21,6 +21,8 @@ class CustomerInfoActivity6 : AppCompatActivity() {
         val selectedStorage = intent.getStringExtra("SELECTED_STORAGE")
         val selectedColor = intent.getStringExtra("SELECTED_COLOR")
         val selectedPrice = intent.getStringExtra("SELECTED_PRICE")
+        val deliveryType = intent.getStringExtra("DELIVERY_TYPE")
+        val campusName = intent.getStringExtra("CAMPUS_NAME")
 
         // Initialize EditTexts for user input
         val fullNameEditText: EditText = findViewById(R.id.fullNameEditText)
@@ -58,6 +60,8 @@ class CustomerInfoActivity6 : AppCompatActivity() {
                 intent.putExtra("SELECTED_STORAGE", selectedStorage)
                 intent.putExtra("SELECTED_COLOR", selectedColor)
                 intent.putExtra("selectedPrice", selectedPrice)
+                intent.putExtra("DELIVERY_TYPE", deliveryType)
+                intent.putExtra("CAMPUS_NAME", campusName)
                 startActivity(intent)
 
             } else {

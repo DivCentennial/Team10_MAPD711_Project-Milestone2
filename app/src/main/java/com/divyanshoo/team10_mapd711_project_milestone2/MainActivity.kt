@@ -7,7 +7,7 @@ Group Project
 
 Team 10
 
- Overall Description: This milestone 2 we make a mobile shopping app where we can shop different brands with their respective models.
+Overall Description: This milestone 2 we make a mobile shopping app where we can shop different brands with their respective models.
 */
 
 //MainActivity.kt

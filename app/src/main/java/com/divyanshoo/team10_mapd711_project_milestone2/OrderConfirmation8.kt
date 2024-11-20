@@ -25,6 +25,9 @@ class OrderConfirmation8 : AppCompatActivity() {
         val email = intent.getStringExtra("email")
         val phone = intent.getStringExtra("phone")
         val paymentMethod = intent.getStringExtra("paymentMethod")
+        val deliveryType = intent.getStringExtra("DELIVERY_TYPE")
+        val campusName = intent.getStringExtra("CAMPUS_NAME")
+
         // Initializing the TextViews to display the order information
         val orderSummaryTextView: TextView = findViewById(R.id.orderSummaryTextView)
         val customerInfoTextView: TextView = findViewById(R.id.customerInfoTextView)
@@ -38,15 +41,29 @@ class OrderConfirmation8 : AppCompatActivity() {
             Color: $phoneColor
         """.trimIndent()
 
-        // Displaying customer info
-        customerInfoTextView.text = """
+        if ( deliveryType == "Door Delivery") {
+            // Displaying customer info
+            customerInfoTextView.text = """
             Customer Name: $customerName
-            Delivery Address: $deliveryAddress
+            Customer Address: $deliveryAddress
             Email: $email
             Phone No: $phone
             Payment Method: $paymentMethod
+            Delivery Type: $deliveryType
+        """.trimIndent()
+        }
+        else {
+            customerInfoTextView.text = """
+            Customer Name: $customerName
+            Customer Address: $deliveryAddress
+            Email: $email
+            Phone No: $phone
+            Payment Method: $paymentMethod
+            Delivery Type: $deliveryType
+            Campus Name: $campusName
         """.trimIndent()
 
+        }
         //adding return to home page functionality
         val homeButton: Button = findViewById(R.id.homeButton)
         homeButton.setOnClickListener {

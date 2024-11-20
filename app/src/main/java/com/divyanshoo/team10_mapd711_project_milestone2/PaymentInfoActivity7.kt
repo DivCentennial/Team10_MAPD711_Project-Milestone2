@@ -76,6 +76,8 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             val phonePrice = intent.getStringExtra("selectedPrice")
             val email = intent.getStringExtra("email")
             val phone = intent.getStringExtra("phone")
+            val deliveryType = intent.getStringExtra("DELIVERY_TYPE")
+            val campusName = intent.getStringExtra("CAMPUS_NAME")
 
             // Create an Intent to navigate to OrderConfirmation8
             val intent = Intent(this, OrderConfirmation8::class.java)
@@ -91,6 +93,8 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             intent.putExtra("email", email)
             intent.putExtra("phone", phone)
             intent.putExtra("paymentMethod", paymentMethod)
+            intent.putExtra("DELIVERY_TYPE", deliveryType)
+            intent.putExtra("CAMPUS_NAME", campusName)
 
             // Start the OrderConfirmation8 activity
             startActivity(intent)
