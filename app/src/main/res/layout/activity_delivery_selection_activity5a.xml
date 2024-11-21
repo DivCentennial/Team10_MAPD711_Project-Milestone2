@@ -20,6 +20,7 @@
         android:spinnerMode="dropdown"
         android:paddingEnd="20dp" />
 
+    <!-- Campus selection Spinner (hidden initially) -->
     <Button
         android:id="@+id/proceedButton"
         android:layout_width="match_parent"
@@ -28,7 +29,6 @@
         android:text="Proceed"
         android:textColor="#BF387D" />
 
-    <!-- Campus selection Spinner (hidden initially) -->
     <Button
         android:id="@+id/proceedtocustomerinfoButton"
         android:layout_width="30dp"
