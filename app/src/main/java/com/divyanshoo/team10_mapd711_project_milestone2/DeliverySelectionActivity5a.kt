@@ -18,13 +18,13 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var googleMap: GoogleMap
     private lateinit var locationSpinner: Spinner
 
-    // Campus data
+    // Campus data  ,, ATTENTIOn include the full address
     private val campusLocations = listOf(
-        Campus("Morningside", LatLng(43.78713095599446, -79.18935308080529), "755 Morningside Ave, Scarborough, ON M1C 4Z4"),
-        Campus("Downsview", LatLng(43.74804023006045, -79.47487355889258), "65 Carl Hall Rd, Toronto, ON M3K 2C1"),
-        Campus("Ashtonbee", LatLng(43.730346082748056, -79.29202483005702), "75 Ashtonbee Rd, Scarborough, ON M1L 4C9"),
-        Campus("Progress", LatLng(43.78538241881133, -79.22812618772701), "941 Progress Ave, Scarborough, ON M1G 3T8"),
-        Campus("SAC", LatLng(43.69026700487268, -79.34687459617166), "951 Carlaw Ave, Toronto, ON M4K 3M2")
+        Campus("Morningside", LatLng(43.78713095599446, -79.18935308080529), "755 Morningside Ave, Scarborough, ON M1C 4Z4,8:30a.m.–4:30p.m., +14162895000, centennialcollege.ca"),
+        Campus("Downsview", LatLng(43.74804023006045, -79.47487355889258), "65 Carl Hall Rd, Toronto, ON M3K 2C1, 8:30a.m.–4:30p.m,+14162895000, centennialcollege.ca"),
+        Campus("Ashtonbee", LatLng(43.730346082748056, -79.29202483005702), "75 Ashtonbee Rd, Scarborough, ON M1L 4C9, 8:30a.m.–4:30p.m,+14162895000, centennialcollege.ca"),
+        Campus("Progress", LatLng(43.78538241881133, -79.22812618772701), "941 Progress Ave, Scarborough, ON M1G 3T8, 8:30a.m.–4:30p.m,+14162895000, centennialcollege.ca"),
+        Campus("SAC", LatLng(43.69026700487268, -79.34687459617166), "951 Carlaw Ave, Toronto, ON M4K 3M2, 8:30a.m.–4:30p.m,+14162895000, centennialcollege.ca")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
