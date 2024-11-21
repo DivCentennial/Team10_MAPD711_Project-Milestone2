@@ -1,57 +1,74 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:background="#BF387D">
 
-    <fragment
-        android:id="@+id/mapFragment"
-        class="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="396dp"
-        android:layout_height="252dp" />
-
-    <Spinner
-        android:id="@+id/deliverySpinner"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:background="@drawable/spinner_border"
-        android:spinnerMode="dropdown"
-        android:paddingEnd="20dp" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <!-- Campus selection Spinner (hidden initially) -->
-    <Button
-        android:id="@+id/proceedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:text="Proceed"
-        android:textColor="#BF387D" />
+        <!-- Delivery Options Spinner -->
+        <TextView
+            android:id="@+id/textViewDelivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Delivery Option:"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"/>
 
-    <Button
-        android:id="@+id/proceedtocustomerinfoButton"
-        android:layout_width="30dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/white"
-        android:text="Proceed"
-        android:textColor="#BF387D"
-        android:visibility="gone" />
+        <Spinner
+            android:id="@+id/deliverySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/spinner_border"
+            android:paddingEnd="20dp"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/white" />
 
-    <Spinner
-        android:id="@+id/campusSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        <!-- Campus Spinner (hidden initially) -->
+        <TextView
+            android:id="@+id/textViewCampus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Campus:"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
 
-    <!-- Map Fragment container (hidden initially) -->
-    <FrameLayout
-        android:id="@+id/mapFragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:visibility="gone">
+        <Spinner
+            android:id="@+id/campusSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@drawable/spinner_border"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/white" />
 
-    </FrameLayout>
+        <!-- Map Fragment Container (hidden initially) -->
+        <FrameLayout
+            android:id="@+id/mapFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
 
-</LinearLayout>
+        <!-- Proceed Button -->
+        <Button
+            android:id="@+id/proceedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/white"
+            android:text="Proceed ➡"
+            android:textColor="#BF387D"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+</ScrollView>
