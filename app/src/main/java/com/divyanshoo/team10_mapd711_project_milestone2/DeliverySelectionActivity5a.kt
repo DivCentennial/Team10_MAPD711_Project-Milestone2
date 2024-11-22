@@ -1,3 +1,5 @@
+//DeliverySelectionActivity5a
+// User can select the Campus Pickup or the home delivery,if campus selected then map is shown if home then not shown.
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.content.Intent
@@ -18,6 +20,7 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
     private lateinit var locationSpinner: Spinner
+    private lateinit var satelliteSwitch: Switch  // satellite view
 
     private val campusLocations = listOf(
         Campus(
@@ -60,43 +63,45 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
         val deliveryOptions = arrayOf("Door Delivery", "Campus Pickup")
         val deliverySpinner: Spinner = findViewById(R.id.deliverySpinner)
 
-        // Custom ArrayAdapter with custom item layout for the selected item
+        // Spinner adapter
         val adapter = ArrayAdapter(
             this,
-            R.layout.spinner_item, // Custom layout for the selected item (white text)
+            R.layout.spinner_item,
             deliveryOptions
         )
-        // Use the default system dropdown layout for the dropdown items (black text)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // Default dropdown layout
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         deliverySpinner.adapter = adapter
 
+        // View references
         val mapFragmentContainer = findViewById<FrameLayout>(R.id.mapFragmentContainer)
-        locationSpinner = findViewById(R.id.campusSpinner)
+        locationSpinner = findViewById(R.id.campusSpinner)    // Location spinner
+        satelliteSwitch = findViewById(R.id.satelliteSwitch)    //satellite switch
         val proceedButton: Button = findViewById(R.id.proceedButton)
         val textViewCampus = findViewById<TextView>(R.id.textViewCampus)
 
+        //Visibility decider
         mapFragmentContainer.visibility = View.GONE
         locationSpinner.visibility = View.GONE
         textViewCampus.visibility = View.GONE
+        satelliteSwitch.visibility = View.GONE
 
         deliverySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?, view: View?, position: Int, id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if (deliveryOptions[position] == "Campus Pickup") {
                     mapFragmentContainer.visibility = View.VISIBLE
                     locationSpinner.visibility = View.VISIBLE
                     textViewCampus.visibility = View.VISIBLE
+                    satelliteSwitch.visibility = View.VISIBLE
 
                     locationSpinner.adapter = ArrayAdapter(
                         this@DeliverySelectionActivity5a,
-                        R.layout.spinner_item,  // Reference custom spinner layout for campuses
+                        R.layout.spinner_item,
                         campusLocations.map { it.name }
                     ).apply {
-                        setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item) // Custom dropdown
+                        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     }
 
-                    // Initialize map fragment if not already done
+                    // Initialize map fragment
                     val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragmentContainer)
                             as? SupportMapFragment ?: SupportMapFragment.newInstance().also {
                         supportFragmentManager.beginTransaction()
@@ -108,6 +113,7 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
                     mapFragmentContainer.visibility = View.GONE
                     locationSpinner.visibility = View.GONE
                     textViewCampus.visibility = View.GONE
+                    satelliteSwitch.visibility = View.GONE
                 }
             }
 
@@ -132,12 +138,17 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
             }
             startActivity(intent)
         }
+
+        satelliteSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (::googleMap.isInitialized) {
+                googleMap.mapType = if (isChecked) GoogleMap.MAP_TYPE_SATELLITE else GoogleMap.MAP_TYPE_NORMAL
+            }
+        }
     }
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
 
-        // Set the default camera position to the Morningside campus
         val morningsideCampus = campusLocations[0]
         googleMap.clear()
         googleMap.addMarker(
@@ -148,13 +159,8 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
         )
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(morningsideCampus.location, 15f))
 
-        // Set custom InfoWindowAdapter to display full address
         googleMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
-            override fun getInfoWindow(marker: Marker): View? {
-                // No need for custom content, use default window
-                return null
-            }
-
+            override fun getInfoWindow(marker: Marker): View? = null
             override fun getInfoContents(marker: Marker): View? {
                 val context = applicationContext
                 val linearLayout = LinearLayout(context)
@@ -163,14 +169,11 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
                 val titleTextView = TextView(context)
                 titleTextView.text = marker.title
                 titleTextView.setTextColor(Color.BLACK)
-                titleTextView.textSize = 16f
                 linearLayout.addView(titleTextView)
 
                 val snippetTextView = TextView(context)
-                snippetTextView.text = marker.snippet // Full address from the marker
+                snippetTextView.text = marker.snippet
                 snippetTextView.setTextColor(Color.BLACK)
-                snippetTextView.textSize = 14f
-                snippetTextView.setPadding(0, 5, 0, 0)
                 linearLayout.addView(snippetTextView)
 
                 return linearLayout
@@ -179,30 +182,20 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
 
         locationSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                updateMap(campusLocations[position])
+                val campus = campusLocations[position]
+                googleMap.clear()
+                googleMap.addMarker(
+                    MarkerOptions()
+                        .position(campus.location)
+                        .title(campus.name)
+                        .snippet(campus.address)
+                )
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campus.location, 15f))
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
 
-    private fun updateMap(campus: Campus) {
-        if (::googleMap.isInitialized) {
-            googleMap.clear()
-            googleMap.addMarker(
-                MarkerOptions()
-                    .position(campus.location)
-                    .title(campus.name)
-                    .snippet(campus.address)
-            )
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campus.location, 15f))
-        }
-    }
-
-
-    data class Campus(
-        val name: String,
-        val location: LatLng,
-        val address: String
-    )
+    data class Campus(val name: String, val location: LatLng, val address: String)
 }

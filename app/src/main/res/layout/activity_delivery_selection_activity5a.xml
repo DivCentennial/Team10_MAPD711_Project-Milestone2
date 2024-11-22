@@ -10,26 +10,21 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Delivery Options Spinner -->
         <TextView
             android:id="@+id/textViewDelivery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/delivery_selection_header"
+            android:text="Select Delivery Option:"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp" />
 
         <Spinner
             android:id="@+id/deliverySpinner"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/spinner_border"
-            android:paddingEnd="20dp"
-            android:spinnerMode="dropdown"
-            android:textColor="@color/black" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/spinner_border" />
 
-        <!-- Campus Spinner (hidden initially) -->
         <TextView
             android:id="@+id/textViewCampus"
             android:layout_width="wrap_content"
@@ -37,19 +32,25 @@
             android:text="Select Campus:"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_marginTop="16dp" />
 
         <Spinner
             android:id="@+id/campusSpinner"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:visibility="gone"
-            android:background="@drawable/spinner_border"
-            android:spinnerMode="dropdown"
-            android:textColor="@color/black" />
+            android:background="@drawable/spinner_border" />
 
-        <!-- Map Fragment Container (hidden initially) -->
+        <Switch
+            android:id="@+id/satelliteSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Satellite View"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:layout_marginTop="8dp" />
+
         <FrameLayout
             android:id="@+id/mapFragmentContainer"
             android:layout_width="match_parent"
@@ -57,18 +58,17 @@
             android:layout_marginTop="16dp"
             android:visibility="gone" />
 
-        <!-- Proceed Button -->
         <Button
             android:id="@+id/proceedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:backgroundTint="@color/white"
-            android:text="@string/proceed_btn"
+            android:text="Proceed"
             android:textColor="#BF387D"
             android:textSize="16sp"
-            android:padding="12dp"
-            android:layout_gravity="center_horizontal" />
+            android:padding="12dp" />
 
     </LinearLayout>
 </ScrollView>
+

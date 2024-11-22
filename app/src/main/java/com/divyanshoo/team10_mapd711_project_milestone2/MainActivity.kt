@@ -2,12 +2,13 @@
 Name: - Divyanshoo Sinha (301486627)
       - Kashish Pramod Yadav (301485842)
 
-Milestone 2
+Milestone 3
 Group Project
 
 Team 10
 
-Overall Description: This milestone 2 we make a mobile shopping app where we can shop different brands with their respective models.
+Overall Description: This milestone 3 we integrate google maps in our project from milestone 2 and user can select campus or door delivery.
+in campus pickup user can select among 5 locations and based on that the map location is changed.
 */
 
 //MainActivity.kt
