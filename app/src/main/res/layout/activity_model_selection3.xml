@@ -15,7 +15,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select your model! 📲"
+        android:text="@string/model_selection_header"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,7 +28,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:contentDescription="List of phone models"
+        android:contentDescription="@string/phone_model_list"
         app:layout_constraintTop_toBottomOf="@+id/titleTextView"
         app:layout_constraintBottom_toTopOf="@+id/selectedModelTextView"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         android:id="@+id/selectedModelTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selected Model: None"
+        android:text="@string/selected_model_text"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView"
@@ -65,7 +65,7 @@
         android:layout_marginTop="36dp"
         android:backgroundTint="@color/white"
         android:contentDescription="Select phone color"
-        android:text="Select Color 🌈➡"
+        android:text="@string/color_selection_header"
         android:textColor="#BF387D"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,21 +101,21 @@
             android:id="@+id/radio_64gb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="64 GB"
+            android:text="@string/storage_gb_1"
             android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radio_128gb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="128 GB"
+            android:text="@string/storage_gb_2"
             android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radio_256gb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="256 GB"
+            android:text="@string/storage_gb_3"
             android:textColor="@color/white" />
     </RadioGroup>
 
@@ -140,7 +140,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Final Price: $0"
+        android:text="@string/final_price_text"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroupStorage"

@@ -26,7 +26,7 @@
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:backgroundTint="@color/white"
-        android:text="Order now !  🤩"
+        android:text="@string/order_now_button"
         android:textColor="#BF387D"
         android:textSize="20sp"
         android:textStyle="bold"

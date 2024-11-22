@@ -5,4 +5,61 @@
         <item>Google Pixel</item>
         <item>iPhone</item>
     </string-array>
+    <string name="order_now_button">Order now !  🤩</string>
+    <string name="phone_brand_header">Select your phone brand 📱</string>
+    <string name="proceed_btn"> Proceed →</string>
+
+<!--    model selection strings-->
+    <string name="model_selection_header">Select your phone model 📱</string>">
+    <string name="phone_model_list">List of phone models</string>
+    <string name="selected_model_text">Selected Model: None</string>
+    <string name="final_price_text"> Final Price: $0</string>
+    <string name="storage_gb_1">64 GB</string>
+    <string name="storage_gb_2">128 GB</string>
+    <string name="storage_gb_3">256 GB</string>
+    <string name="color_selection_header">Select your phone color 🌈</string>
+    <string name="checkout_btn">Confirm</string>
+    <string name="delivery_selection_header">Select your delivery option 📦</string>
+
+<!--    customer info strings-->
+    <string name="full_name_editText">Full Name</string>
+    <string name="full_name_label">Enter Full Name</string>
+    <string name="enter_city_label">Enter City</string>
+    <string name="enter_city_editText">City</string>
+    <string name="enter_street_label">Enter Street</string>
+    <string name="enter_street_editText">Street Name</string>
+    <string name="enter_postal_code_label">Enter Postal Code</string>
+    <string name="postal_code_editText">Postal Code</string>
+    <string name="phone_number_editText">Phone Number</string>
+    <string name="phone_number_label">Enter Phone Number</string>
+    <string name="enter_email_label">Enter Email</string>
+    <string name="email_editText">Email</string>
+    <string name="submit_btn">Submit</string>
+
+<!--    checkout page strings-->
+    <string name="checkout_summary">Checkout Summary</string>
+    <string name="brand_label">Brand: </string>
+    <string name="model_label">Model: </string>
+    <string name="storage_label">Storage: </string>
+    <string name="color_label">Color: </string>
+    <string name="price_label">Price: </string>
+    <string name="confirm_btn">Confirm</string>
+
+<!--    payment info strings-->
+    <string name="payment_info_header">Enter payment details 💰</string>
+    <string name="choose_payment_method">Choose payment method 🤑</string>
+    <string name="credit_card">Credit Card 💳</string>
+    <string name="debit_card">Debit Card 💳</string>
+    <string name="apple_pay">Apple Pay 🍎</string>
+    <string name="google_pay">Google Pay 🅖</string>
+    <string name="card_number_editText">Card Number</string>
+    <string name="expiry_date_editText">Expiry Date (MM/YY)</string>
+    <string name="checkout_btn2">Checkout 🛒 ➡</string>
+
+
+<!--    order confirmation page strings-->
+
+    <string name="confirmation_header">Your Order is Confirmed!</string>
+    <string name="order_summary_header">Order Summary</string>
+    <string name="customer_info_string">Customer Info</string>
 </resources>

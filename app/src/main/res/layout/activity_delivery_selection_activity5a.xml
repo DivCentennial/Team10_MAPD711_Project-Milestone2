@@ -15,7 +15,7 @@
             android:id="@+id/textViewDelivery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Delivery Option:"
+            android:text="@string/delivery_selection_header"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:layout_marginBottom="8dp"/>
@@ -23,7 +23,7 @@
         <Spinner
             android:id="@+id/deliverySpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@drawable/spinner_border"
             android:paddingEnd="20dp"
             android:spinnerMode="dropdown"
@@ -43,7 +43,7 @@
         <Spinner
             android:id="@+id/campusSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:visibility="gone"
             android:background="@drawable/spinner_border"
             android:spinnerMode="dropdown"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:backgroundTint="@color/white"
-            android:text="Proceed ➡"
+            android:text="@string/proceed_btn"
             android:textColor="#BF387D"
             android:textSize="16sp"
             android:padding="12dp"

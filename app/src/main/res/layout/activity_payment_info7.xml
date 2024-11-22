@@ -15,7 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:text="Enter payment details 💰"
+        android:text="@string/payment_info_header"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -30,7 +30,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Choose payment method 🤑"
+        android:text="@string/choose_payment_method"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -53,28 +53,28 @@
             android:id="@+id/radioCreditCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Credit Card 💳"
+            android:text="@string/credit_card"
             android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioDebitCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Debit Card 💳"
+            android:text="@string/debit_card"
             android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioApplePay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apple Pay 🍎"
+            android:text="@string/apple_pay"
             android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioGooglePay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Google Pay 🅖"
+            android:text="@string/google_pay"
             android:textColor="@color/white" />
     </RadioGroup>
 
@@ -85,7 +85,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="Card Number"
+        android:hint="@string/card_number_editText"
         android:inputType="number"
         android:textColor="@color/white"
         android:visibility="gone"
@@ -100,7 +100,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="Expiry Date (MM/YY)"
+        android:hint="@string/expiry_date_editText"
         android:inputType="date"
         android:textColor="@color/white"
         android:visibility="gone"
@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
         android:backgroundTint="@color/white"
-        android:text="Checkout 🛒 ➡"
+        android:text="@string/checkout_btn2"
         android:textColor="#BF387D"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
