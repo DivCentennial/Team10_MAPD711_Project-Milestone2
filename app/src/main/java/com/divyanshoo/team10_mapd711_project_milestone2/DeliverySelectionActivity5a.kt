@@ -1,8 +1,7 @@
-// DeliverySelectionActivity5a.kt
-
 package com.divyanshoo.team10_mapd711_project_milestone2
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -12,6 +11,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
@@ -19,7 +19,6 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var googleMap: GoogleMap
     private lateinit var locationSpinner: Spinner
 
-    // Campus data with full addresses, working hours, and contact info
     private val campusLocations = listOf(
         Campus(
             "Morningside",
@@ -52,93 +51,72 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivery_selection_activity5a)
 
-        // Retrieve phone details from the intent
         val selectedBrand = intent.getStringExtra("SELECTED_BRAND") ?: "N/A"
         val selectedModel = intent.getStringExtra("SELECTED_MODEL") ?: "N/A"
         val selectedPrice = intent.getStringExtra("SELECTED_PRICE") ?: "N/A"
         val selectedStorage = intent.getStringExtra("SELECTED_STORAGE") ?: "N/A"
         val selectedColor = intent.getStringExtra("SELECTED_COLOR") ?: "N/A"
 
-        // Set up delivery options spinner
         val deliveryOptions = arrayOf("Door Delivery", "Campus Pickup")
         val deliverySpinner: Spinner = findViewById(R.id.deliverySpinner)
-        deliverySpinner.adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_item,
-            deliveryOptions
-        ).apply {
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        }
 
-        // Initialize campus-related views
+        // Custom ArrayAdapter with custom item layout for the selected item
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.spinner_item, // Custom layout for the selected item (white text)
+            deliveryOptions
+        )
+        // Use the default system dropdown layout for the dropdown items (black text)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // Default dropdown layout
+        deliverySpinner.adapter = adapter
+
         val mapFragmentContainer = findViewById<FrameLayout>(R.id.mapFragmentContainer)
         locationSpinner = findViewById(R.id.campusSpinner)
         val proceedButton: Button = findViewById(R.id.proceedButton)
         val textViewCampus = findViewById<TextView>(R.id.textViewCampus)
 
-        // Hide campus-related views by default
         mapFragmentContainer.visibility = View.GONE
         locationSpinner.visibility = View.GONE
         textViewCampus.visibility = View.GONE
 
-        // Listener for delivery option spinner
         deliverySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
                 if (deliveryOptions[position] == "Campus Pickup") {
-                    // Show campus-related views
                     mapFragmentContainer.visibility = View.VISIBLE
                     locationSpinner.visibility = View.VISIBLE
                     textViewCampus.visibility = View.VISIBLE
 
-                    // Setup campus spinner
                     locationSpinner.adapter = ArrayAdapter(
                         this@DeliverySelectionActivity5a,
-                        android.R.layout.simple_spinner_item,
+                        R.layout.spinner_item,  // Reference custom spinner layout for campuses
                         campusLocations.map { it.name }
                     ).apply {
-                        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item) // Custom dropdown
                     }
 
-                    // Initialize and add the map fragment if not already added
-                    val existingMapFragment =
-                        supportFragmentManager.findFragmentById(R.id.mapFragmentContainer) as? SupportMapFragment
-                    if (existingMapFragment == null) {
-                        val newMapFragment = SupportMapFragment.newInstance()
+                    // Initialize map fragment if not already done
+                    val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragmentContainer)
+                            as? SupportMapFragment ?: SupportMapFragment.newInstance().also {
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.mapFragmentContainer, newMapFragment)
+                            .replace(R.id.mapFragmentContainer, it)
                             .commit()
-                        newMapFragment.getMapAsync(this@DeliverySelectionActivity5a)
+                        it.getMapAsync(this@DeliverySelectionActivity5a)
                     }
-
                 } else {
-                    // Hide campus-related views
                     mapFragmentContainer.visibility = View.GONE
                     locationSpinner.visibility = View.GONE
                     textViewCampus.visibility = View.GONE
-
-                    // Optionally, remove the map fragment when not needed
-                    val existingMapFragment =
-                        supportFragmentManager.findFragmentById(R.id.mapFragmentContainer) as? SupportMapFragment
-                    existingMapFragment?.let {
-                        supportFragmentManager.beginTransaction()
-                            .remove(it)
-                            .commit()
-                    }
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        // Listener for proceed button
         proceedButton.setOnClickListener {
             val selectedDeliveryOption = deliverySpinner.selectedItem.toString()
-            val intent = Intent(this, CustomerInfoActivity6::class.java)
-
-            // Add common details to the intent
-            intent.apply {
+            val intent = Intent(this, CustomerInfoActivity6::class.java).apply {
                 putExtra("SELECTED_BRAND", selectedBrand)
                 putExtra("SELECTED_MODEL", selectedModel)
                 putExtra("SELECTED_PRICE", selectedPrice)
@@ -146,7 +124,6 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
                 putExtra("SELECTED_COLOR", selectedColor)
                 putExtra("DELIVERY_TYPE", selectedDeliveryOption)
 
-                // Include campus details if Campus Pickup is selected
                 if (selectedDeliveryOption == "Campus Pickup" && locationSpinner.selectedItem != null) {
                     val selectedCampus = campusLocations[locationSpinner.selectedItemPosition]
                     putExtra("CAMPUS_NAME", selectedCampus.name)
@@ -159,16 +136,49 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-        // Optionally, set a default campus if needed
-        if (map.cameraPosition.target == LatLng(0.0, 0.0)) { // Check if map is not initialized
-            updateMap(campusLocations[0])
-        }
 
-        // Listener for campus spinner selection
+        // Set the default camera position to the Morningside campus
+        val morningsideCampus = campusLocations[0]
+        googleMap.clear()
+        googleMap.addMarker(
+            MarkerOptions()
+                .position(morningsideCampus.location)
+                .title(morningsideCampus.name)
+                .snippet(morningsideCampus.address)
+        )
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(morningsideCampus.location, 15f))
+
+        // Set custom InfoWindowAdapter to display full address
+        googleMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
+            override fun getInfoWindow(marker: Marker): View? {
+                // No need for custom content, use default window
+                return null
+            }
+
+            override fun getInfoContents(marker: Marker): View? {
+                val context = applicationContext
+                val linearLayout = LinearLayout(context)
+                linearLayout.orientation = LinearLayout.VERTICAL
+
+                val titleTextView = TextView(context)
+                titleTextView.text = marker.title
+                titleTextView.setTextColor(Color.BLACK)
+                titleTextView.textSize = 16f
+                linearLayout.addView(titleTextView)
+
+                val snippetTextView = TextView(context)
+                snippetTextView.text = marker.snippet // Full address from the marker
+                snippetTextView.setTextColor(Color.BLACK)
+                snippetTextView.textSize = 14f
+                snippetTextView.setPadding(0, 5, 0, 0)
+                linearLayout.addView(snippetTextView)
+
+                return linearLayout
+            }
+        })
+
         locationSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?, view: View?, position: Int, id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 updateMap(campusLocations[position])
             }
 
@@ -177,17 +187,19 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun updateMap(campus: Campus) {
-        googleMap.clear()
-        googleMap.addMarker(
-            MarkerOptions()
-                .position(campus.location)
-                .title(campus.name)
-                .snippet(campus.address)
-        )
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campus.location, 15f))
+        if (::googleMap.isInitialized) {
+            googleMap.clear()
+            googleMap.addMarker(
+                MarkerOptions()
+                    .position(campus.location)
+                    .title(campus.name)
+                    .snippet(campus.address)
+            )
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campus.location, 15f))
+        }
     }
 
-    // Campus data class
+
     data class Campus(
         val name: String,
         val location: LatLng,

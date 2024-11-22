@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Spinner
@@ -32,6 +33,17 @@ class BrandSelectionActivity2 : AppCompatActivity() {
         // Initialize Spinner and ImageView
         val spinner: Spinner = findViewById(R.id.spinner)
         phoneImage = findViewById(R.id.phoneImage)
+
+        // Create an ArrayAdapter using the string array and custom layout
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.brands, // Use the existing string-array
+            R.layout.spinner_item // Custom layout for white text
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // Default dropdown style
+
+        // Set the adapter to the spinner
+        spinner.adapter = adapter
 
         // Set a listener on the spinner to update the image based on selection
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

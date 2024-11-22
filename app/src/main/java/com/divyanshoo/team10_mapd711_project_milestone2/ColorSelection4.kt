@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.activity.enableEdgeToEdge
 
+
 class ColorSelection4 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,14 +33,20 @@ class ColorSelection4 : AppCompatActivity() {
         // Initialize the color spinner
         val colorSpinner: Spinner = findViewById(R.id.colorSpinner)
         val colorOptions = listOf("Blue 💙", "Black 🖤", "Silver 🩶", "Gold 💛", "Red ❤️")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, colorOptions)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        // Use a custom layout for the spinner items
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.spinner_item, // Custom layout for white text
+            colorOptions
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // Default dropdown style
         colorSpinner.adapter = adapter
 
         // Set "Blue 💙" as the default selected item
         colorSpinner.setSelection(0)
 
-        // Gets the selected phone details from the previous screen via Intent
+        // Retrieve selected phone details from Intent
         val selectedBrand = intent.getStringExtra("SELECTED_BRAND")
         val selectedModel = intent.getStringExtra("SELECTED_MODEL")
         val selectedPrice = intent.getStringExtra("SELECTED_PRICE")
