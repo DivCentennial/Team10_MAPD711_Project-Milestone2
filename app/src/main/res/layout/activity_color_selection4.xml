@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -18,39 +19,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_container"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="60dp" />
 
-    <RelativeLayout
-        android:id="@+id/spinner_container"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="86dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+    <!-- RadioGroup for color selection -->
+    <RadioGroup
+        android:id="@+id/colorRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/textView4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Spinner with border -->
-        <Spinner
-            android:id="@+id/colorSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/spinner_border"
-        android:spinnerMode="dropdown"
-        android:entries="@array/brands"
-        android:textColor="@color/white"
-        android:paddingEnd="20dp" />
+        <RadioButton
+            android:id="@+id/radio_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blue 💙"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white" />
 
-        <!-- Custom Arrow positioned at the right end -->
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/spinner_arrow" />
+        <RadioButton
+            android:id="@+id/radio_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Black 🖤"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white" />
 
-    </RelativeLayout>
+        <RadioButton
+            android:id="@+id/radio_silver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Silver 🩶"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white" />
+
+        <RadioButton
+            android:id="@+id/radio_gold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gold 💛"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white" />
+
+        <RadioButton
+            android:id="@+id/radio_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Red ❤️"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white" />
+    </RadioGroup>
 
     <!-- Checkout Button -->
     <Button
@@ -61,7 +82,8 @@
         android:text="@string/checkout_btn"
         android:backgroundTint="@color/white"
         android:textColor="#BF387D"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_container"
+        app:layout_constraintTop_toBottomOf="@+id/colorRadioGroup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
