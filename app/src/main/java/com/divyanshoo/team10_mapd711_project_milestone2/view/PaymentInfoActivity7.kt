@@ -1,7 +1,7 @@
 //PaymentInfoActivity7.kt
 
 // View description: User can select payment method and enter card details.
-package com.divyanshoo.team10_mapd711_project_milestone2
+package com.divyanshoo.team10_mapd711_project_milestone2.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.divyanshoo.team10_mapd711_project_milestone2.R
 
 class PaymentInfoActivity7 : AppCompatActivity() {
 

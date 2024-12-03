@@ -34,41 +34,47 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBHOU6IdZoxTKRYMh18O1jw-xDD82nC4qk" />
 
+
+
         <activity
             android:name=".MapActivity5b"
             android:exported="false" />
         <activity
-            android:name=".DeliverySelectionActivity5a"
+            android:name=".view.DeliverySelectionActivity5a"
             android:exported="false" />
         <activity
-            android:name=".OrderConfirmation8"
+            android:name=".view.OrderConfirmation8"
             android:exported="false" />
         <activity
-            android:name=".PaymentInfoActivity7"
+            android:name=".view.PaymentInfoActivity7"
             android:exported="false" />
         <activity
-            android:name=".CustomerInfoActivity6"
+            android:name=".view.CustomerInfoActivity6"
             android:exported="false" />
         <activity
-            android:name=".CheckoutActivity5"
+            android:name=".view.CheckoutActivity5"
             android:exported="false" />
         <activity
-            android:name=".ColorSelection4"
+            android:name=".view.ColorSelection4"
             android:exported="false" />
         <activity
-            android:name=".ModelSelection3"
+            android:name=".view.ModelSelection3"
             android:exported="false" />
         <activity
-            android:name=".BrandSelectionActivity2"
+            android:name=".view.BrandSelectionActivity2"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".view.RegisterActivity"></activity>
+        <activity android:name=".view.UserDetailsActivity9" />
+
     </application>
 
 </manifest>

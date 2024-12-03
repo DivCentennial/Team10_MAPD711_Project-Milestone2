@@ -1,6 +1,6 @@
 //DeliverySelectionActivity5a
 // User can select the Campus Pickup or the home delivery,if campus selected then map is shown if home then not shown.
-package com.divyanshoo.team10_mapd711_project_milestone2
+package com.divyanshoo.team10_mapd711_project_milestone2.view
 
 import android.content.Intent
 import android.graphics.Color
@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.divyanshoo.team10_mapd711_project_milestone2.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

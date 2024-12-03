@@ -1,5 +1,5 @@
 // PhoneModelAdapter.kt
-package com.divyanshoo.team10_mapd711_project_milestone2
+package com.divyanshoo.team10_mapd711_project_milestone2.view
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.divyanshoo.team10_mapd711_project_milestone2.model.PhoneModel
+import com.divyanshoo.team10_mapd711_project_milestone2.R
 
 class PhoneModelAdapter(
     private val phoneModels: List<PhoneModel>,

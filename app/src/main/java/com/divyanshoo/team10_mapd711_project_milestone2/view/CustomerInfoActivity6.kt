@@ -1,6 +1,6 @@
 //CustomerInfoActivity6.kt
 // View description: User can enter customer information.
-package com.divyanshoo.team10_mapd711_project_milestone2
+package com.divyanshoo.team10_mapd711_project_milestone2.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.divyanshoo.team10_mapd711_project_milestone2.R
 
 class CustomerInfoActivity6 : AppCompatActivity() {
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#BF387D"
     android:padding="16dp"
-    tools:context=".CheckoutActivity5">
+    tools:context=".view.CheckoutActivity5">
 
     <TextView
         android:id="@+id/titleTextView"

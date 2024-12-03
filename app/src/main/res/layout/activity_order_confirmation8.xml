@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#BF387D"
     android:padding="16dp"
-    tools:context=".OrderConfirmation8">
+    tools:context=".view.OrderConfirmation8">
 
     <!-- Heading for the confirmation screen -->
     <TextView

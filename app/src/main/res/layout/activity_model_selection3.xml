@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BF387D"
-    tools:context=".ModelSelection3">
+    tools:context=".view.ModelSelection3">
 
     <!-- Title Text -->
 

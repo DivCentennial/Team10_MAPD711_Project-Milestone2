@@ -1,13 +1,14 @@
 //OrderConfirmation8.kt
 
 // View description: User can see the order confirmation phone details, customer information, and payment method.
-package com.divyanshoo.team10_mapd711_project_milestone2
+package com.divyanshoo.team10_mapd711_project_milestone2.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.divyanshoo.team10_mapd711_project_milestone2.R
 
 class OrderConfirmation8 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

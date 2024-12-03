@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BF387D"
-    tools:context=".PaymentInfoActivity7">
+    tools:context=".view.PaymentInfoActivity7">
 
     <TextView
         android:id="@+id/titleTextView2"

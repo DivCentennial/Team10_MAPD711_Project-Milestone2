@@ -3,11 +3,13 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.divyanshoo.team10_mapd711_project_milestone2"
     compileSdk = 34
+
 
 
     defaultConfig {
@@ -29,6 +31,9 @@ android {
             )
         }
     }
+    sourceSets {
+        getByName("main").java.srcDir("build/generated/ksp/main/kotlin")
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -48,7 +53,10 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.maps)
+    implementation("androidx.room:room-runtime:2.5.0")
+    implementation("androidx.room:room-ktx:2.5.0") // Kotlin extensions
     implementation("com.google.android.gms:play-services-maps:19.0.0")
+    ksp("androidx.room:room-compiler:2.5.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
