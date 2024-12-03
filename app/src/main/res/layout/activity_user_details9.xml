@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BF387D"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    tools:context=".view.UserDetailsActivity9">
+
+    <!-- User Details Heading -->
+    <TextView
+        android:id="@+id/tv_user_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="User Details"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- First Name -->
+
+    <!-- Last Name -->
+
+    <TextView
+        android:id="@+id/tv_first_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="First Name:"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_details" />
+
+    <EditText
+        android:id="@+id/et_first_name_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="68dp"
+        android:backgroundTint="#FFFFFF"
+        android:enabled="false"
+        android:padding="8dp"
+        android:text="John"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/tv_first_name_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_details" />
+
+    <TextView
+        android:id="@+id/tv_last_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Last Name:"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_first_name_label" />
+
+    <EditText
+        android:id="@+id/et_last_name_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#FFFFFF"
+        android:enabled="false"
+        android:padding="8dp"
+        android:text="Doe"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_last_name_label"
+        app:layout_constraintTop_toBottomOf="@id/et_first_name_value" />
+
+    <!-- Address -->
+
+    <TextView
+        android:id="@+id/tv_address_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="Address:"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_last_name_label" />
+
+    <EditText
+        android:id="@+id/et_address_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="68dp"
+        android:backgroundTint="#FFFFFF"
+        android:enabled="false"
+        android:padding="8dp"
+        android:text="123 Maple St."
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_address_label"
+        app:layout_constraintTop_toBottomOf="@id/et_last_name_value" />
+
+    <!-- City -->
+
+    <TextView
+        android:id="@+id/tv_city_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:text="City:"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_address_label" />
+
+    <EditText
+        android:id="@+id/et_city_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="112dp"
+        android:backgroundTint="#FFFFFF"
+        android:enabled="false"
+        android:padding="8dp"
+        android:text="Toronto"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_city_label"
+        app:layout_constraintTop_toBottomOf="@id/et_address_value" />
+
+    <!-- Postal Code -->
+
+    <TextView
+        android:id="@+id/tv_postal_code_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Postal Code:"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_city_label" />
+
+    <EditText
+        android:id="@+id/et_postal_code_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#FFFFFF"
+        android:enabled="false"
+        android:padding="8dp"
+        android:text="M5A 1B2"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_postal_code_label"
+        app:layout_constraintTop_toBottomOf="@id/et_city_value" />
+
+    <!-- Edit Button for All Fields -->
+    <Button
+        android:id="@+id/btn_edit_all"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#FFFFFF"
+        android:padding="12dp"
+        android:text="Edit"
+        android:textColor="#BF387D"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/et_postal_code_value"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#4CAF50"
+        android:padding="12dp"
+        android:text="Save"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/btn_edit_all"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Proceed to Brand Selection Button -->
+    <Button
+        android:id="@+id/btn_proceed_brand_selection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#FFFFFF"
+        android:padding="12dp"
+        android:text="Proceed to Brand Selection"
+        android:textColor="#BF387D"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/btn_save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
