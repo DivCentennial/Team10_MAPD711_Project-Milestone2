@@ -7,6 +7,7 @@ package com.divyanshoo.team10_mapd711_project_milestone2.view
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -33,7 +34,7 @@ class OrderConfirmation8 : AppCompatActivity() {
         setContentView(R.layout.activity_order_confirmation8)
 
         // Initialize SharedPreferences and Repositories
-        sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
 
         // Properly initialize userRepository
         val userDao = AppDatabase.getDatabase(this).userDao()
@@ -121,6 +122,15 @@ class OrderConfirmation8 : AppCompatActivity() {
 
     private fun getLoggedInUserId(): Int {
         // Fetch the logged-in user's ID from SharedPreferences
-        return sharedPreferences.getInt("LOGGED_IN_USER_ID", -1)
+        val loggedInUserId = sharedPreferences.getInt("LOGGED_IN_USER_ID", -1)
+        if (loggedInUserId == -1) {
+            // Log an error for debugging if no user ID is found
+            Log.e("OrderConfirmation8", "No user ID found in SharedPreferences.")
+        } else {
+            // Log the retrieved user ID for verification
+            Log.d("OrderConfirmation8", "Logged-in user ID: $loggedInUserId")
+        }
+        return loggedInUserId
     }
+
 }
