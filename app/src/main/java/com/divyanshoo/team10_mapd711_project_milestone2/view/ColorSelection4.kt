@@ -14,12 +14,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.divyanshoo.team10_mapd711_project_milestone2.R
+import com.divyanshoo.team10_mapd711_project_milestone2.model.Phone
+import com.divyanshoo.team10_mapd711_project_milestone2.repository.PhoneRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.UUID
 
 class ColorSelection4 : AppCompatActivity() {
+
+    private lateinit var phoneRepository: PhoneRepository // Initialize PhoneRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_selection4)
+
+        // Initialize PhoneRepository
+        phoneRepository = PhoneRepository(this)
 
         // Edge-to-edge configuration
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -57,6 +68,23 @@ class ColorSelection4 : AppCompatActivity() {
             // Log the selected color
             Log.d("ColorSelection4", "Selected Color: $selectedColor")
 
+            // Create a Phone object
+            val phone = Phone(
+                productId = UUID.randomUUID(),
+                phoneMake = selectedBrand ?: "Unknown",
+                phoneModel = selectedModel ?: "Unknown",
+                phoneColor = selectedColor,
+                storageCapacity = selectedStorage ?: "Unknown",
+                price = selectedPrice?.toBigDecimalOrNull()?.toString() ?: "0"
+
+            )
+
+            // Save the phone to the database
+            CoroutineScope(Dispatchers.IO).launch {
+                phoneRepository.insertPhone(phone)
+                Log.d("ColorSelection4", "Phone saved: $phone")
+            }
+
             // Pass data to CheckoutActivity
             val intent = Intent(this, CheckoutActivity5::class.java)
             intent.putExtra("SELECTED_BRAND", selectedBrand)
@@ -68,3 +96,4 @@ class ColorSelection4 : AppCompatActivity() {
         }
     }
 }
+
