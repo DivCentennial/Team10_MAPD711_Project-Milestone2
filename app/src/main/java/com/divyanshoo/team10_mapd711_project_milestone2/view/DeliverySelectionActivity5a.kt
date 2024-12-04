@@ -21,34 +21,14 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
     private lateinit var locationSpinner: Spinner
-    private lateinit var satelliteSwitch: Switch  // satellite view
+    private lateinit var satelliteSwitch: Switch  // Satellite view
 
     private val campusLocations = listOf(
-        Campus(
-            "Morningside",
-            LatLng(43.78713095599446, -79.18935308080529),
-            "755 Morningside Ave, Scarborough, ON M1C 4Z4\n8:30 a.m.–4:30 p.m.\n+1 416-289-5000\ncentennialcollege.ca"
-        ),
-        Campus(
-            "Downsview",
-            LatLng(43.74804023006045, -79.47487355889258),
-            "65 Carl Hall Rd, Toronto, ON M3K 2C1\n8:30 a.m.–4:30 p.m.\n+1 416-289-5000\ncentennialcollege.ca"
-        ),
-        Campus(
-            "Ashtonbee",
-            LatLng(43.730346082748056, -79.29202483005702),
-            "75 Ashtonbee Rd, Scarborough, ON M1L 4C9\n8:30 a.m.–4:30 p.m.\n+1 416-289-5000\ncentennialcollege.ca"
-        ),
-        Campus(
-            "Progress",
-            LatLng(43.78538241881133, -79.22812618772701),
-            "941 Progress Ave, Scarborough, ON M1G 3T8\n8:30 a.m.–4:30 p.m.\n+1 416-289-5000\ncentennialcollege.ca"
-        ),
-        Campus(
-            "SAC",
-            LatLng(43.69026700487268, -79.34687459617166),
-            "951 Carlaw Ave, Toronto, ON M4K 3M2\n8:30 a.m.–4:30 p.m.\n+1 416-289-5000\ncentennialcollege.ca"
-        )
+        Campus("Morningside", LatLng(43.78713095599446, -79.18935308080529), "755 Morningside Ave"),
+        Campus("Downsview", LatLng(43.74804023006045, -79.47487355889258), "65 Carl Hall Rd"),
+        Campus("Ashtonbee", LatLng(43.730346082748056, -79.29202483005702), "75 Ashtonbee Rd"),
+        Campus("Progress", LatLng(43.78538241881133, -79.22812618772701), "941 Progress Ave"),
+        Campus("SAC", LatLng(43.69026700487268, -79.34687459617166), "951 Carlaw Ave")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,12 +55,12 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
 
         // View references
         val mapFragmentContainer = findViewById<FrameLayout>(R.id.mapFragmentContainer)
-        locationSpinner = findViewById(R.id.campusSpinner)    // Location spinner
-        satelliteSwitch = findViewById(R.id.satelliteSwitch)    //satellite switch
+        locationSpinner = findViewById(R.id.campusSpinner)
+        satelliteSwitch = findViewById(R.id.satelliteSwitch)
         val proceedButton: Button = findViewById(R.id.proceedButton)
         val textViewCampus = findViewById<TextView>(R.id.textViewCampus)
 
-        //Visibility decider
+        // Visibility settings
         mapFragmentContainer.visibility = View.GONE
         locationSpinner.visibility = View.GONE
         textViewCampus.visibility = View.GONE
@@ -123,7 +103,8 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
 
         proceedButton.setOnClickListener {
             val selectedDeliveryOption = deliverySpinner.selectedItem.toString()
-            val intent = Intent(this, CustomerInfoActivity6::class.java).apply {
+            val intent = Intent(this, PaymentInfoActivity7::class.java).apply {
+                // Pass phone details and delivery type
                 putExtra("SELECTED_BRAND", selectedBrand)
                 putExtra("SELECTED_MODEL", selectedModel)
                 putExtra("SELECTED_PRICE", selectedPrice)
@@ -131,6 +112,7 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
                 putExtra("SELECTED_COLOR", selectedColor)
                 putExtra("DELIVERY_TYPE", selectedDeliveryOption)
 
+                // If Campus Pickup, pass campus details
                 if (selectedDeliveryOption == "Campus Pickup" && locationSpinner.selectedItem != null) {
                     val selectedCampus = campusLocations[locationSpinner.selectedItemPosition]
                     putExtra("CAMPUS_NAME", selectedCampus.name)
