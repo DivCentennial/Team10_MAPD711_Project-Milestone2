@@ -1,33 +1,35 @@
-//  BrandSelectionActivity2.kt
-// View description: User can select desired brands.
+// BrandSelectionActivity2.kt
 package com.divyanshoo.team10_mapd711_project_milestone2.view
 
-import ModelSelection3
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.divyanshoo.team10_mapd711_project_milestone2.R
-import com.divyanshoo.team10_mapd711_project_milestone2.repository.PhoneRepository
+import com.divyanshoo.team10_mapd711_project_milestone2.model.AppDatabase
+import com.divyanshoo.team10_mapd711_project_milestone2.model.Phone
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.UUID
 
 class BrandSelectionActivity2 : AppCompatActivity() {
-    private lateinit var phoneRepository: PhoneRepository
     private lateinit var phoneImage: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_brand_selection2)
 
-        phoneRepository = PhoneRepository(this) // Initialize repository
-
         val spinner: Spinner = findViewById(R.id.spinner)
         phoneImage = findViewById(R.id.phoneImage)
 
-        // Get brands from repository
-        val brands = phoneRepository.getPhoneBrands()
+        // Hardcoded brands for simplicity
+        val brands = listOf("Samsung", "Google Pixel", "iPhone")
 
-        // Create ArrayAdapter using brands from the repository
+        // Create ArrayAdapter using the brands
         val adapter = ArrayAdapter(this, R.layout.spinner_item, brands)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
@@ -45,13 +47,36 @@ class BrandSelectionActivity2 : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        // Navigate to ModelSelection3 with the selected brand
+        // Navigate to ModelSelection3 with the selected brand and save it to the database
         val proceedButton: Button = findViewById(R.id.button)
         proceedButton.setOnClickListener {
             val selectedBrand = spinner.selectedItem.toString()
-            val intent = Intent(this, ModelSelection3::class.java)
-            intent.putExtra("SELECTED_BRAND", selectedBrand)
-            startActivity(intent)
+
+            // Save selected brand to the database
+            lifecycleScope.launch {
+                saveSelectedBrandToDatabase(selectedBrand)
+
+                // Navigate to the next activity
+                val intent = Intent(this@BrandSelectionActivity2, ModelSelection3::class.java)
+                intent.putExtra("SELECTED_BRAND", selectedBrand)
+                startActivity(intent)
+            }
+        }
+    }
+
+    // Function to save the selected brand to the database
+    private suspend fun saveSelectedBrandToDatabase(brand: String) {
+        withContext(Dispatchers.IO) {
+            val phoneDao = AppDatabase.getDatabase(applicationContext).phoneDao()
+            val phone = Phone(
+                productId = UUID.randomUUID(), // Default value (auto-increment or primary key)
+                phoneMake = brand,
+                phoneModel = "", // Leave blank for now
+                phoneColor = "", // Leave blank for now
+                storageCapacity = "", // Leave blank for now
+                price = "" // Leave blank for now
+            )
+            phoneDao.insertPhone(phone)
         }
     }
 }
