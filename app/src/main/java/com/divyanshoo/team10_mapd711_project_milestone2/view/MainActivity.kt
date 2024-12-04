@@ -18,6 +18,7 @@ package com.divyanshoo.team10_mapd711_project_milestone2.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -80,6 +81,9 @@ class MainActivity : AppCompatActivity() {
                         editor.putString("lastName", user.lastname)
                         editor.putInt("LOGGED_IN_USER_ID", user.custId)  // Store the user's ID
                         editor.apply()  // Don't forget to apply the changes!
+
+                        // Log to confirm the user ID was saved
+                        Log.d("MainActivity", "Saved LOGGED_IN_USER_ID: ${user.custId}")
 
                         // Navigate to the UserDetailsActivity
                         runOnUiThread {
