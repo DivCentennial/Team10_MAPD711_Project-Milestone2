@@ -14,6 +14,8 @@ in campus pickup user can select among 5 locations and based on that the map loc
 //MainActivity.kt
 // View Description: This view is the opening view with the app logo and a button to order a phone.
 package com.divyanshoo.team10_mapd711_project_milestone2.view
+
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -30,7 +32,6 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var database: AppDatabase // Declare the Room database
     private lateinit var userRepository: UserRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,12 +42,18 @@ class MainActivity : AppCompatActivity() {
         val userDao = AppDatabase.getDatabase(this).userDao()
         userRepository = UserRepository(userDao)
 
-        // Initialize Room database
-//        database = Room.databaseBuilder(
-//            applicationContext,
-//            AppDatabase::class.java,
-//            "app_database"
-//        ).build()
+//        // Check if user is already logged in
+       val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+//        val loggedInUserEmail = sharedPreferences.getString("userEmail", null)
+//
+//        // If user is logged in, skip login screen and navigate directly to the next activity
+//        if (loggedInUserEmail != null) {
+//            val intent = Intent(this@MainActivity, UserDetailsActivity9::class.java)
+//            intent.putExtra("USER_EMAIL", loggedInUserEmail)
+//            startActivity(intent)
+//            finish() // Close the login screen
+//            return
+//        }
 
         val emailField = findViewById<EditText>(R.id.et_email)
         val passwordField = findViewById<EditText>(R.id.et_password)
@@ -54,6 +61,8 @@ class MainActivity : AppCompatActivity() {
         val registerButton = findViewById<Button>(R.id.btn_register)
 
         // Login button logic
+        // Inside your MainActivity.kt
+
         loginButton.setOnClickListener {
             val email = emailField.text.toString()
             val password = passwordField.text.toString()
@@ -64,10 +73,20 @@ class MainActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     val user = userRepository.getUserByEmail(email)
                     if (user != null && user.password == password) {
+                        // Save the logged-in user's information in SharedPreferences
+                        val editor = sharedPreferences.edit()
+                        editor.putString("userEmail", email)
+                        editor.putString("firstName", user.firstname)
+                        editor.putString("lastName", user.lastname)
+                        editor.putInt("LOGGED_IN_USER_ID", user.custId)  // Store the user's ID
+                        editor.apply()  // Don't forget to apply the changes!
+
+                        // Navigate to the UserDetailsActivity
                         runOnUiThread {
                             val intent = Intent(this@MainActivity, UserDetailsActivity9::class.java)
                             intent.putExtra("USER_EMAIL", email)
                             startActivity(intent)
+                            finish() // Close the login screen
                         }
                     } else {
                         runOnUiThread {
@@ -78,13 +97,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         // Register button logic
         registerButton.setOnClickListener {
             // Navigate to RegisterActivity
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
     }
 }
