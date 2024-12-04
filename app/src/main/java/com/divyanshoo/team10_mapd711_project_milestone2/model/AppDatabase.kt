@@ -6,11 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [User::class],
-    version = 2 // Increment this from 1 to 2 or higher
+    entities = [User::class, Phone::class], // Add Phone entity here
+    version = 3 // Increment the version number
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun phoneDao(): PhoneDao // Add a DAO for the Phone entity
 
     companion object {
         @Volatile
