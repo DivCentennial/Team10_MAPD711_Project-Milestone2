@@ -1,55 +1,56 @@
+package com.divyanshoo.team10_mapd711_project_milestone2.view
+
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.divyanshoo.team10_mapd711_project_milestone2.R
-import com.divyanshoo.team10_mapd711_project_milestone2.view.PhoneModelAdapter
 import com.divyanshoo.team10_mapd711_project_milestone2.model.PhoneModel
 import com.divyanshoo.team10_mapd711_project_milestone2.repository.PhoneRepository
-import com.divyanshoo.team10_mapd711_project_milestone2.view.ColorSelection4
 
 class ModelSelection3 : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var phoneModelAdapter: PhoneModelAdapter
-    private lateinit var phoneModels: List<PhoneModel>
-    private var selectedModel: PhoneModel? = null
-
-    // Use the repository to handle data fetching
     private lateinit var phoneRepository: PhoneRepository
+    private var phoneModels: List<PhoneModel> = emptyList()
+    private var selectedModel: PhoneModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_model_selection3)
 
+        // Initialize repository
+        phoneRepository = PhoneRepository(this)
+
+        // Get references to UI components
         recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        // Get the selected brand from the previous screen
-        val selectedBrand = intent.getStringExtra("SELECTED_BRAND") ?: ""
-
-        // Fetch phone models for the selected brand using the repository
-        phoneModels = phoneRepository.getPhoneModelsForBrand(selectedBrand)
-
         val selectedModelTextView = findViewById<TextView>(R.id.selectedModelTextView)
         val radioGroupStorage = findViewById<RadioGroup>(R.id.radioGroupStorage)
         val finalPriceTextView = findViewById<TextView>(R.id.textView5)
         val buttonNext = findViewById<Button>(R.id.colorSelectionButton)
 
-        // Set up the RecyclerView with the adapter
+        // Get the selected brand from the intent
+        val selectedBrand = intent.getStringExtra("SELECTED_BRAND") ?: ""
+
+        // Fetch models for the selected brand
+        phoneModels = phoneRepository.getPhoneModelsForBrand(selectedBrand)
+        if (phoneModels.isEmpty()) {
+            Toast.makeText(this, "No models available for the selected brand.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Set up RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
         phoneModelAdapter = PhoneModelAdapter(phoneModels) { model ->
             selectedModel = model
             selectedModelTextView.text = "Selected Model: ${model.name} - $${model.price}"
-            finalPriceTextView.text = "" // Clear the final price when the model changes
+            finalPriceTextView.text = "" // Clear final price when model changes
         }
         recyclerView.adapter = phoneModelAdapter
 
-        // Listen for storage selection and update the final price
+        // Handle storage option selection
         radioGroupStorage.setOnCheckedChangeListener { _, checkedId ->
             if (selectedModel != null && checkedId != -1) {
                 val selectedStorage = findViewById<RadioButton>(checkedId).text.toString()
@@ -68,7 +69,7 @@ class ModelSelection3 : AppCompatActivity() {
             }
         }
 
-        // Handle the Next button click
+        // Handle "Next" button click
         buttonNext.setOnClickListener {
             if (selectedModel == null) {
                 Toast.makeText(this, "Please select a phone model", Toast.LENGTH_SHORT).show()
@@ -91,7 +92,7 @@ class ModelSelection3 : AppCompatActivity() {
             }
             val finalPrice = basePrice + additionalCost
 
-            // Navigate to the next screen and pass the selected data
+            // Navigate to the next screen
             val intent = Intent(this, ColorSelection4::class.java).apply {
                 putExtra("SELECTED_BRAND", selectedBrand)
                 putExtra("SELECTED_MODEL", selectedModel?.name)
