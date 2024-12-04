@@ -23,27 +23,34 @@ class PaymentInfoActivity7 : AppCompatActivity() {
         val paymentMethodRadioGroup: RadioGroup = findViewById(R.id.paymentMethodRadioGroup)
         val cardNumberEditText: EditText = findViewById(R.id.cardNumberEditText)
         val expiryDateEditText: EditText = findViewById(R.id.expiryDateEditText)
+        val cardHolderNameEditText: EditText = findViewById(R.id.cardHolderNameEditText)
+        val cvvEditText: EditText = findViewById(R.id.cvvEditText)
         val submitButton: Button = findViewById(R.id.submitButton2)
 
-        // Initially, hide the card details input fields
+        // Initially hide all card details input fields
         cardNumberEditText.visibility = View.GONE
         expiryDateEditText.visibility = View.GONE
+        cardHolderNameEditText.visibility = View.GONE
+        cvvEditText.visibility = View.GONE
 
-        // Set up a listener to handle payment method selection
+        // Show or hide fields based on the selected payment method
         paymentMethodRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             val selectedPaymentMethod: RadioButton = findViewById(checkedId)
             val paymentMethodText = selectedPaymentMethod.text.toString()
 
-            // Show card details input fields if Credit or Debit is selected
             if (paymentMethodText == "Credit Card 💳" || paymentMethodText == "Debit Card 💳") {
                 cardNumberEditText.visibility = View.VISIBLE
                 expiryDateEditText.visibility = View.VISIBLE
+                cardHolderNameEditText.visibility = View.VISIBLE
+                cvvEditText.visibility = View.VISIBLE
             } else {
-                // Hide card details input fields if Apple Pay or Google Pay is selected
                 cardNumberEditText.visibility = View.GONE
                 expiryDateEditText.visibility = View.GONE
+                cardHolderNameEditText.visibility = View.GONE
+                cvvEditText.visibility = View.GONE
             }
         }
+
 
         // Set up submit button to handle the checkout process
         submitButton.setOnClickListener {
@@ -51,20 +58,26 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             val selectedPaymentMethodId = paymentMethodRadioGroup.checkedRadioButtonId
             val selectedPaymentMethod: RadioButton = findViewById(selectedPaymentMethodId)
             val paymentMethod = selectedPaymentMethod.text.toString()
+            val cardHolderNameEditText: EditText = findViewById(R.id.cardHolderNameEditText)
+            val cvvEditText: EditText = findViewById(R.id.cvvEditText)
 
+
+            // Validate payment method
             if (paymentMethod == "Credit Card 💳" || paymentMethod == "Debit Card 💳") {
                 // Get card details
                 val cardNumber = cardNumberEditText.text.toString()
                 val expiryDate = expiryDateEditText.text.toString()
+                val cardHolderName = cardHolderNameEditText.text.toString()
+                val cvv = cvvEditText.text.toString()
 
-                if (cardNumber.isEmpty() || expiryDate.isEmpty()) {
-                    Toast.makeText(this, "Please fill in card details.", Toast.LENGTH_SHORT).show()
+                // Validate card details
+                if (cardNumber.isEmpty() || expiryDate.isEmpty() || cardHolderName.isEmpty() || cvv.isEmpty()) {
+                    Toast.makeText(this, "Please fill in all card details.", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
             }
 
-
-            // Retrieving the passed data
+            // Retrieve the passed data
             val customerName = intent.getStringExtra("fullName")
             val streetName = intent.getStringExtra("streetName")
             val city = intent.getStringExtra("city")
@@ -77,8 +90,8 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             val phonePrice = intent.getStringExtra("selectedPrice")
             val email = intent.getStringExtra("email")
             val phone = intent.getStringExtra("phone")
-            val deliveryType = intent.getStringExtra("DELIVERY_TYPE")
-            val campusName = intent.getStringExtra("CAMPUS_NAME")
+            val deliveryType = intent.getStringExtra("DELIVERY_TYPE") // Ensure these are passed
+            val campusName = intent.getStringExtra("CAMPUS_NAME")     // Ensure these are passed
 
             // Create an Intent to navigate to OrderConfirmation8
             val intent = Intent(this, OrderConfirmation8::class.java)
@@ -94,8 +107,8 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             intent.putExtra("email", email)
             intent.putExtra("phone", phone)
             intent.putExtra("paymentMethod", paymentMethod)
-            intent.putExtra("DELIVERY_TYPE", deliveryType)
-            intent.putExtra("CAMPUS_NAME", campusName)
+            intent.putExtra("DELIVERY_TYPE", deliveryType) // Pass these values
+            intent.putExtra("CAMPUS_NAME", campusName)     // Pass these values
 
             // Start the OrderConfirmation8 activity
             startActivity(intent)
@@ -103,6 +116,7 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             // Show a success message
             Toast.makeText(this, "Payment Successful!", Toast.LENGTH_SHORT).show()
         }
+
 
     }
 }
