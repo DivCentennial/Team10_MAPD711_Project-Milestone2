@@ -5,6 +5,7 @@ package com.divyanshoo.team10_mapd711_project_milestone2.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -17,7 +18,8 @@ import com.divyanshoo.team10_mapd711_project_milestone2.R
 class PaymentInfoActivity7 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+                super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment_info7)
 
         val paymentMethodRadioGroup: RadioGroup = findViewById(R.id.paymentMethodRadioGroup)
@@ -87,11 +89,18 @@ class PaymentInfoActivity7 : AppCompatActivity() {
             val phoneModel = intent.getStringExtra("SELECTED_MODEL")
             val phoneStorage = intent.getStringExtra("SELECTED_STORAGE")
             val phoneColor = intent.getStringExtra("SELECTED_COLOR")
-            val phonePrice = intent.getStringExtra("selectedPrice")
+            val phonePrice = intent.getStringExtra("SELECTED_PRICE")
             val email = intent.getStringExtra("email")
             val phone = intent.getStringExtra("phone")
             val deliveryType = intent.getStringExtra("DELIVERY_TYPE") // Ensure these are passed
             val campusName = intent.getStringExtra("CAMPUS_NAME")     // Ensure these are passed
+
+            // Log the values to verify if they are passed correctly
+            Log.d("PaymentInfoActivity7", "Brand: $phoneBrand")
+            Log.d("PaymentInfoActivity7", "Model: $phoneModel")
+            Log.d("PaymentInfoActivity7", "Storage: $phoneStorage")
+            Log.d("PaymentInfoActivity7", "Color: $phoneColor")
+            Log.d("PaymentInfoActivity7", "Price: $phonePrice")
 
             // Create an Intent to navigate to OrderConfirmation8
             val intent = Intent(this, OrderConfirmation8::class.java)

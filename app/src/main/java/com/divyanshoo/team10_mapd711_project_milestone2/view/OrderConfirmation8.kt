@@ -44,9 +44,22 @@ class OrderConfirmation8 : AppCompatActivity() {
 
         // Retrieving data passed via Intent
         val phoneProductId = intent.getStringExtra("SELECTED_PRODUCT_ID")?.let { UUID.fromString(it) }
+        Log.d("OrderConfirmation8", "Phone Product ID: $phoneProductId")
         val paymentMethod = intent.getStringExtra("paymentMethod")
         val deliveryType = intent.getStringExtra("DELIVERY_TYPE")
         val campusName = intent.getStringExtra("CAMPUS_NAME")
+        val phoneBrand = intent.getStringExtra("SELECTED_BRAND")
+        val phoneModel = intent.getStringExtra("phoneModel")
+        val phonePrice = intent.getStringExtra("phonePrice")
+        val phoneStorage = intent.getStringExtra("phoneStorage")
+        val phoneColor = intent.getStringExtra("phoneColor")
+
+        Log.d("OrderConfirmation8", "Received Brand: $phoneBrand")
+        Log.d("OrderConfirmation8", "Received Model: $phoneModel")
+        Log.d("OrderConfirmation8", "Received Price: $phonePrice")
+        Log.d("OrderConfirmation8", "Received Storage: $phoneStorage")
+        Log.d("OrderConfirmation8", "Received Color: $phoneColor")
+
 
         // View references
         val orderSummaryTextView: TextView = findViewById(R.id.orderSummaryTextView)
@@ -58,14 +71,17 @@ class OrderConfirmation8 : AppCompatActivity() {
             val loggedInUser = getLoggedInUser()
             val phone = phoneProductId?.let { getPhoneById(it) }
 
+            // Log the phone details for debugging
+            Log.d("OrderConfirmation8", "Retrieved phone details: $phone")
+
             // Populate order summary
             phone?.let {
                 orderSummaryTextView.text = """
-                Phone Brand: ${it.phoneMake}
-                Model: ${it.phoneModel}
-                Price: ${it.price}
-                Storage: ${it.storageCapacity}
-                Color: ${it.phoneColor}
+                Brand: $phoneBrand
+    Model: $phoneModel
+    Price: $phonePrice USD
+    Storage: $phoneStorage
+    Color: $phoneColor
             """.trimIndent()
             }
 
@@ -78,7 +94,15 @@ class OrderConfirmation8 : AppCompatActivity() {
                 Email: ${user.email}
                 Payment Method: $paymentMethod
                 Delivery Type: $deliveryType
-                """.trimIndent()
+                
+                Phone Details 📲:
+                Brand: $phoneBrand
+                Model: $phoneModel
+                Price(C$): $phonePrice CAD
+                Storage: $phoneStorage
+                Color: $phoneColor
+                
+                  """.trimIndent()
                 } else {
                     """
                 Customer Name: ${user.firstname} ${user.lastname}
@@ -87,6 +111,14 @@ class OrderConfirmation8 : AppCompatActivity() {
                 Payment Method: $paymentMethod
                 Delivery Type: $deliveryType
                 Campus Name: $campusName
+                
+                Phone Details 📲:
+                Brand: $phoneBrand
+                Model: $phoneModel
+                Price(C${'$'}): $phonePrice CAD
+                Storage: $phoneStorage
+                Color: $phoneColor
+                
                 """.trimIndent()
                 }
                 customerInfoTextView.text = customerInfo

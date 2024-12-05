@@ -23,6 +23,13 @@ class CheckoutActivity5 : AppCompatActivity() {
         val selectedColor = intent.getStringExtra("SELECTED_COLOR") ?: "N/A"
         val selectedPrice = intent.getStringExtra("SELECTED_PRICE") ?: "N/A"  // Retrieve price
 
+        // Log the retrieved data
+        android.util.Log.d("CheckoutActivity5", "Brand: $selectedBrand")
+        android.util.Log.d("CheckoutActivity5", "Model: $selectedModel")
+        android.util.Log.d("CheckoutActivity5", "Storage: $selectedStorage")
+        android.util.Log.d("CheckoutActivity5", "Color: $selectedColor")
+        android.util.Log.d("CheckoutActivity5", "Price: $selectedPrice")
+
         // Set values to TextViews
         findViewById<TextView>(R.id.brandTextView).text = "Brand: $selectedBrand"
         findViewById<TextView>(R.id.modelTextView).text = "Model: $selectedModel"

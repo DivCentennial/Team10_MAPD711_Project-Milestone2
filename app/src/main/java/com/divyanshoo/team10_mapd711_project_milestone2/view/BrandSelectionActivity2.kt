@@ -4,6 +4,7 @@ package com.divyanshoo.team10_mapd711_project_milestone2.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -68,15 +69,30 @@ class BrandSelectionActivity2 : AppCompatActivity() {
     private suspend fun saveSelectedBrandToDatabase(brand: String) {
         withContext(Dispatchers.IO) {
             val phoneDao = AppDatabase.getDatabase(applicationContext).phoneDao()
-            val phone = Phone(
-                productId = UUID.randomUUID(), // Default value (auto-increment or primary key)
-                phoneMake = brand,
-                phoneModel = "", // Leave blank for now
-                phoneColor = "", // Leave blank for now
-                storageCapacity = "", // Leave blank for now
-                price = "" // Leave blank for now
-            )
-            phoneDao.insertPhone(phone)
+
+            // Check if a phone with the same brand already exists
+            val existingPhone = phoneDao.getPhonesByBrand(brand).firstOrNull()
+            if (existingPhone == null) {
+                val phone = Phone(
+                    productId = UUID.randomUUID(),
+                    phoneMake = brand,
+                    phoneModel = "",
+                    phoneColor = "",
+                    storageCapacity = "",
+                    price = ""
+                )
+
+                // Log the selected brand
+                Log.d("BrandSelectionActivity2", "Saving brand: $brand")
+
+                // Save the phone details to the database
+                phoneDao.insertPhone(phone)
+            } else {
+                // Log if the brand already exists
+                Log.d("BrandSelectionActivity2", "Brand already exists in the database: $brand")
+            }
         }
     }
+
+
 }

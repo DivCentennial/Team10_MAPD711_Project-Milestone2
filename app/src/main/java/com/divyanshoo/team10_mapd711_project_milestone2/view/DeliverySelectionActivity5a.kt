@@ -41,7 +41,15 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
         val selectedStorage = intent.getStringExtra("SELECTED_STORAGE") ?: "N/A"
         val selectedColor = intent.getStringExtra("SELECTED_COLOR") ?: "N/A"
 
-        val deliveryOptions = arrayOf("Door Delivery", "Campus Pickup")
+// Log the data to check if it's passed correctly
+        android.util.Log.d("DeliverySelection", "Brand: $selectedBrand")
+        android.util.Log.d("DeliverySelection", "Model: $selectedModel")
+        android.util.Log.d("DeliverySelection", "Storage: $selectedStorage")
+        android.util.Log.d("DeliverySelection", "Color: $selectedColor")
+        android.util.Log.d("DeliverySelection", "Price: $selectedPrice")
+
+
+        val deliveryOptions = arrayOf("Door Delivery", "Order Pickup")
         val deliverySpinner: Spinner = findViewById(R.id.deliverySpinner)
 
         // Spinner adapter
@@ -68,7 +76,7 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
 
         deliverySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (deliveryOptions[position] == "Campus Pickup") {
+                if (deliveryOptions[position] == "Order Pickup") {
                     mapFragmentContainer.visibility = View.VISIBLE
                     locationSpinner.visibility = View.VISIBLE
                     textViewCampus.visibility = View.VISIBLE
@@ -113,7 +121,7 @@ class DeliverySelectionActivity5a : AppCompatActivity(), OnMapReadyCallback {
                 putExtra("DELIVERY_TYPE", selectedDeliveryOption)
 
                 // If Campus Pickup, pass campus details
-                if (selectedDeliveryOption == "Campus Pickup" && locationSpinner.selectedItem != null) {
+                if (selectedDeliveryOption == "Order Pickup" && locationSpinner.selectedItem != null) {
                     val selectedCampus = campusLocations[locationSpinner.selectedItemPosition]
                     putExtra("CAMPUS_NAME", selectedCampus.name)
                     putExtra("CAMPUS_ADDRESS", selectedCampus.address)

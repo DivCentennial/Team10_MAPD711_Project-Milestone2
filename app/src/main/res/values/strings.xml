@@ -59,7 +59,7 @@
 
 <!--    order confirmation page strings-->
 
-    <string name="confirmation_header">Your Order is Confirmed!</string>
-    <string name="order_summary_header">Order Summary</string>
+    <string name="confirmation_header">Your Order is Confirmed! 🥳</string>
+    <string name="order_summary_header">Order Summary 📋</string>
     <string name="customer_info_string">Customer Info</string>
 </resources>

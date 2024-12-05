@@ -22,31 +22,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Order Summary -->
-    <TextView
-        android:id="@+id/orderSummaryTextView"
+    <!-- Order Summary and Customer Information Box -->
+    <LinearLayout
+        android:id="@+id/orderInfoBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/order_summary_header"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="16dp"
+        android:divider="?android:attr/dividerHorizontal"
+        android:showDividers="middle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/confirmationTitle" />
+        app:layout_constraintTop_toBottomOf="@id/confirmationTitle">
 
-    <!-- Customer Information -->
-    <TextView
-        android:id="@+id/customerInfoTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/customer_info_string"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/orderSummaryTextView" />
+        <!-- Order Summary Header -->
+        <TextView
+            android:id="@+id/orderSummaryTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/order_summary_header"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:paddingBottom="8dp"/>
+
+        <!-- Phone Details -->
+
+        <!-- Customer Information -->
+        <TextView
+            android:id="@+id/customerInfoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/customer_info_string"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:paddingBottom="8dp"/>
+    </LinearLayout>
 
     <!-- Optional Button to Return Home or View Order Again -->
     <Button
@@ -60,4 +72,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
