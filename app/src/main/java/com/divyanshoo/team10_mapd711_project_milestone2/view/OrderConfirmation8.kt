@@ -22,6 +22,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.UUID
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class OrderConfirmation8 : AppCompatActivity() {
 
@@ -65,6 +69,48 @@ class OrderConfirmation8 : AppCompatActivity() {
         val orderSummaryTextView: TextView = findViewById(R.id.orderSummaryTextView)
         val customerInfoTextView: TextView = findViewById(R.id.customerInfoTextView)
         val homeButton: Button = findViewById(R.id.homeButton)
+
+        val saveOrderButton: Button = findViewById(R.id.button2)
+        saveOrderButton.setOnClickListener {
+            // Save order details to SharedPreferences or Room
+            val sharedPreferencesEditor = sharedPreferences.edit()
+
+            sharedPreferencesEditor.putString("ORDER_PHONE_BRAND", phoneBrand)
+            sharedPreferencesEditor.putString("ORDER_PHONE_MODEL", phoneModel)
+            sharedPreferencesEditor.putString("ORDER_PHONE_PRICE", phonePrice)
+            sharedPreferencesEditor.putString("ORDER_PHONE_STORAGE", phoneStorage)
+            sharedPreferencesEditor.putString("ORDER_PHONE_COLOR", phoneColor)
+            sharedPreferencesEditor.putString("ORDER_PAYMENT_METHOD", paymentMethod)
+            sharedPreferencesEditor.putString("ORDER_DELIVERY_TYPE", deliveryType)
+
+            // Save the current timestamp for the order
+            val orderTimestamp = System.currentTimeMillis()
+            sharedPreferencesEditor.putLong("ORDER_TIMESTAMP", orderTimestamp)
+
+            // Save other necessary fields
+            lifecycleScope.launch {
+                val loggedInUser = getLoggedInUser()
+                loggedInUser?.let { user ->
+                    sharedPreferencesEditor.putString(
+                        "ORDER_USER_NAME",
+                        "${user.firstname} ${user.lastname}"
+                    )
+                    sharedPreferencesEditor.putString(
+                        "ORDER_USER_ADDRESS",
+                        "${user.address}, ${user.city}, ${user.postalCode}"
+                    )
+                }
+            }
+            sharedPreferencesEditor.apply()  // Apply changes to SharedPreferences
+        }
+
+        val checkHistoryButton: Button = findViewById(R.id.button4)
+        checkHistoryButton.setOnClickListener {
+            val intent = Intent(this, OrderHistoryActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
         // Fetch logged-in user data and phone details from the database
         lifecycleScope.launch {

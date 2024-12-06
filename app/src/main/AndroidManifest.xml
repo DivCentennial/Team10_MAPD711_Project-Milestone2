@@ -3,19 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <uses-feature  android:name ="android.hardware.location"/>
+    <uses-feature android:name="android.hardware.location" />
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
@@ -28,13 +24,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Team10_MAPD711_ProjectMilestone2"
         tools:targetApi="31">
-
+        <activity
+            android:name=".view.OrderHistoryActivity"
+            android:exported="false" />
         <!-- Addition of Google Maps API Key -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBHOU6IdZoxTKRYMh18O1jw-xDD82nC4qk" />
-
-
 
         <activity
             android:name=".MapActivity5b"
@@ -68,13 +64,12 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".view.RegisterActivity"></activity>
+        <activity android:name=".view.RegisterActivity" />
         <activity android:name=".view.UserDetailsActivity9" />
-
     </application>
 
 </manifest>

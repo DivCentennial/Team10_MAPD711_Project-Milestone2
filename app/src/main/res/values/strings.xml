@@ -9,7 +9,7 @@
     <string name="phone_brand_header">Select your phone brand 📱</string>
     <string name="proceed_btn"> Proceed →</string>
 
-<!--    model selection strings-->
+    <!--    model selection strings-->
     <string name="model_selection_header">Select your phone model 📱</string>">
     <string name="phone_model_list">List of phone models</string>
     <string name="selected_model_text">Selected Model: None</string>
@@ -21,7 +21,7 @@
     <string name="checkout_btn">Confirm</string>
     <string name="delivery_selection_header">Select your delivery option 📦</string>
 
-<!--    customer info strings-->
+    <!--    customer info strings-->
     <string name="full_name_editText">Full Name</string>
     <string name="full_name_label">Enter Full Name</string>
     <string name="enter_city_label">Enter City</string>
@@ -36,7 +36,7 @@
     <string name="email_editText">Email</string>
     <string name="submit_btn">Submit</string>
 
-<!--    checkout page strings-->
+    <!--    checkout page strings-->
     <string name="checkout_summary">Checkout Summary</string>
     <string name="brand_label">Brand: </string>
     <string name="model_label">Model: </string>
@@ -45,7 +45,7 @@
     <string name="price_label">Price: </string>
     <string name="confirm_btn">Confirm</string>
 
-<!--    payment info strings-->
+    <!--    payment info strings-->
     <string name="payment_info_header">Enter payment details 💰</string>
     <string name="choose_payment_method">Choose payment method 🤑</string>
     <string name="credit_card">Credit Card 💳</string>
@@ -57,7 +57,7 @@
     <string name="checkout_btn2">Checkout 🛒 ➡</string>
 
 
-<!--    order confirmation page strings-->
+    <!--    order confirmation page strings-->
 
     <string name="confirmation_header">Your Order is Confirmed! 🥳</string>
     <string name="order_summary_header">Order Summary 📋</string>
