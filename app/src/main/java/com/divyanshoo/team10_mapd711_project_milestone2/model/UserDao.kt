@@ -2,15 +2,15 @@ package com.divyanshoo.team10_mapd711_project_milestone2.model
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 
 @Dao
 interface UserDao {
 
-    @Insert
-    suspend fun insertUser(user: User) // Insert a user into the database
-
+    @Insert(onConflict = OnConflictStrategy.REPLACE)  // This will insert if the user doesn't exist, or update if the user exists
+    suspend fun insertOrUpdateUser(user: User) // Insert or update user depending on existence
     @Update
     suspend fun updateUser(user: User)
 

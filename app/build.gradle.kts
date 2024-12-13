@@ -55,6 +55,8 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation("androidx.room:room-runtime:2.5.0")
     implementation("androidx.room:room-ktx:2.5.0") // Kotlin extensions
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
     implementation("com.google.android.gms:play-services-maps:19.0.0")
     ksp("androidx.room:room-compiler:2.5.0")
     testImplementation(libs.junit)

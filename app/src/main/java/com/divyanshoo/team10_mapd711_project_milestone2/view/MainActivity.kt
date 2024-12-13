@@ -17,93 +17,77 @@ package com.divyanshoo.team10_mapd711_project_milestone2.view
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
+import androidx.lifecycle.Observer
 import com.divyanshoo.team10_mapd711_project_milestone2.R
 import com.divyanshoo.team10_mapd711_project_milestone2.model.AppDatabase
 import com.divyanshoo.team10_mapd711_project_milestone2.repository.UserRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.divyanshoo.team10_mapd711_project_milestone2.viewmodel.MainViewModel
+import com.divyanshoo.team10_mapd711_project_milestone2.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var userRepository: UserRepository
+    private lateinit var sharedPreferences: SharedPreferences
+
+    // Use ViewModel with a factory
+    private val mainViewModel: MainViewModel by viewModels {
+        val userDao = AppDatabase.getDatabase(this).userDao()
+        val userRepository = UserRepository(userDao)
+        MainViewModelFactory(userRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize userRepository
-        val userDao = AppDatabase.getDatabase(this).userDao()
-        userRepository = UserRepository(userDao)
-
-//        // Check if user is already logged in
-       val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-//        val loggedInUserEmail = sharedPreferences.getString("userEmail", null)
-//
-//        // If user is logged in, skip login screen and navigate directly to the next activity
-//        if (loggedInUserEmail != null) {
-//            val intent = Intent(this@MainActivity, UserDetailsActivity9::class.java)
-//            intent.putExtra("USER_EMAIL", loggedInUserEmail)
-//            startActivity(intent)
-//            finish() // Close the login screen
-//            return
-//        }
-
+        sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val emailField = findViewById<EditText>(R.id.et_email)
         val passwordField = findViewById<EditText>(R.id.et_password)
         val loginButton = findViewById<Button>(R.id.btn_login)
         val registerButton = findViewById<Button>(R.id.btn_register)
 
-        // Login button logic
-        // Inside your MainActivity.kt
+        // Observe login result
+        mainViewModel.loginResult.observe(this, Observer { result ->
+            result.onSuccess { user ->
+                // Save user info to SharedPreferences
+                val editor = sharedPreferences.edit()
+                editor.putString("userEmail", user?.email)
+                editor.putString("firstName", user?.firstname)
+                editor.putString("lastName", user?.lastname)
+                editor.putInt("LOGGED_IN_USER_ID", user?.custId ?: -1)
+                editor.apply()
 
+                // Navigate to the next activity
+                val intent = Intent(this, UserDetailsActivity9::class.java)
+                intent.putExtra("USER_EMAIL", user?.email)
+                startActivity(intent)
+                finish()
+            }
+            result.onFailure {
+                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // Login button logic
         loginButton.setOnClickListener {
             val email = emailField.text.toString()
             val password = passwordField.text.toString()
-
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val user = userRepository.getUserByEmail(email)
-                    if (user != null && user.password == password) {
-                        // Save the logged-in user's information in SharedPreferences
-                        val editor = sharedPreferences.edit()
-                        editor.putString("userEmail", email)
-                        editor.putString("firstName", user.firstname)
-                        editor.putString("lastName", user.lastname)
-                        editor.putInt("LOGGED_IN_USER_ID", user.custId)  // Store the user's ID
-                        editor.apply()  // Don't forget to apply the changes!
-
-                        // Log to confirm the user ID was saved
-                        Log.d("MainActivity", "Saved LOGGED_IN_USER_ID: ${user.custId}")
-
-                        // Navigate to the UserDetailsActivity
-                        runOnUiThread {
-                            val intent = Intent(this@MainActivity, UserDetailsActivity9::class.java)
-                            intent.putExtra("USER_EMAIL", email)
-                            startActivity(intent)
-                            finish() // Close the login screen
-                        }
-                    } else {
-                        runOnUiThread {
-                            Toast.makeText(this@MainActivity, "Invalid credentials", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
+                mainViewModel.loginUser(email, password)
             }
         }
 
         // Register button logic
         registerButton.setOnClickListener {
-            // Navigate to RegisterActivity
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }

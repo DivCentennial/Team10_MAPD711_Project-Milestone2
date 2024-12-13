@@ -1,16 +1,21 @@
 //checkout_activity5.kt
 // View description: User can see the selected phone details and confirm the order.
 
+
 package com.divyanshoo.team10_mapd711_project_milestone2.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import android.widget.Button
+import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.divyanshoo.team10_mapd711_project_milestone2.R
+import com.divyanshoo.team10_mapd711_project_milestone2.viewmodel.CheckoutViewModel
 
 class CheckoutActivity5 : AppCompatActivity() {
+
+    private val checkoutViewModel: CheckoutViewModel by viewModels() // Get ViewModel instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,19 +28,18 @@ class CheckoutActivity5 : AppCompatActivity() {
         val selectedColor = intent.getStringExtra("SELECTED_COLOR") ?: "N/A"
         val selectedPrice = intent.getStringExtra("SELECTED_PRICE") ?: "N/A"  // Retrieve price
 
-        // Log the retrieved data
-        android.util.Log.d("CheckoutActivity5", "Brand: $selectedBrand")
-        android.util.Log.d("CheckoutActivity5", "Model: $selectedModel")
-        android.util.Log.d("CheckoutActivity5", "Storage: $selectedStorage")
-        android.util.Log.d("CheckoutActivity5", "Color: $selectedColor")
-        android.util.Log.d("CheckoutActivity5", "Price: $selectedPrice")
+        // Set data in ViewModel
+        checkoutViewModel.setSelectedPhoneDetails(selectedBrand, selectedModel, selectedStorage, selectedColor, selectedPrice)
 
-        // Set values to TextViews
-        findViewById<TextView>(R.id.brandTextView).text = "Brand: $selectedBrand"
-        findViewById<TextView>(R.id.modelTextView).text = "Model: $selectedModel"
-        findViewById<TextView>(R.id.storageTextView).text = "Storage: $selectedStorage"
-        findViewById<TextView>(R.id.colorTextView).text = "Color: $selectedColor"
-        findViewById<TextView>(R.id.priceTextView).text = "Price: $selectedPrice"  // Display price
+        // Observe the LiveData from ViewModel
+        checkoutViewModel.selectedPhoneDetails.observe(this, { details ->
+            // Set values to TextViews
+            findViewById<TextView>(R.id.brandTextView).text = "Brand: ${details["brand"]}"
+            findViewById<TextView>(R.id.modelTextView).text = "Model: ${details["model"]}"
+            findViewById<TextView>(R.id.storageTextView).text = "Storage: ${details["storage"]}"
+            findViewById<TextView>(R.id.colorTextView).text = "Color: ${details["color"]}"
+            findViewById<TextView>(R.id.priceTextView).text = "Price: ${details["price"]}"
+        })
 
         // Set up the confirm button to proceed to Customer Information screen
         val confirmButton: Button = findViewById(R.id.confirmButton)

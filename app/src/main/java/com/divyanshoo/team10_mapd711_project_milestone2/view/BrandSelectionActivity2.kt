@@ -1,24 +1,19 @@
-// BrandSelectionActivity2.kt
 package com.divyanshoo.team10_mapd711_project_milestone2.view
-
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.divyanshoo.team10_mapd711_project_milestone2.R
-import com.divyanshoo.team10_mapd711_project_milestone2.model.AppDatabase
-import com.divyanshoo.team10_mapd711_project_milestone2.model.Phone
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.UUID
+import com.divyanshoo.team10_mapd711_project_milestone2.viewmodel.BrandSelectionViewModel
 
 class BrandSelectionActivity2 : AppCompatActivity() {
     private lateinit var phoneImage: ImageView
+
+    // Using the ViewModel
+    private val brandSelectionViewModel: BrandSelectionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,46 +48,13 @@ class BrandSelectionActivity2 : AppCompatActivity() {
         proceedButton.setOnClickListener {
             val selectedBrand = spinner.selectedItem.toString()
 
-            // Save selected brand to the database
-            lifecycleScope.launch {
-                saveSelectedBrandToDatabase(selectedBrand)
+            // Save selected brand to the database using ViewModel
+            brandSelectionViewModel.saveSelectedBrandToDatabase(selectedBrand)
 
-                // Navigate to the next activity
-                val intent = Intent(this@BrandSelectionActivity2, ModelSelection3::class.java)
-                intent.putExtra("SELECTED_BRAND", selectedBrand)
-                startActivity(intent)
-            }
+            // Navigate to the next activity
+            val intent = Intent(this@BrandSelectionActivity2, ModelSelection3::class.java)
+            intent.putExtra("SELECTED_BRAND", selectedBrand)
+            startActivity(intent)
         }
     }
-
-    // Function to save the selected brand to the database
-    private suspend fun saveSelectedBrandToDatabase(brand: String) {
-        withContext(Dispatchers.IO) {
-            val phoneDao = AppDatabase.getDatabase(applicationContext).phoneDao()
-
-            // Check if a phone with the same brand already exists
-            val existingPhone = phoneDao.getPhonesByBrand(brand).firstOrNull()
-            if (existingPhone == null) {
-                val phone = Phone(
-                    productId = UUID.randomUUID(),
-                    phoneMake = brand,
-                    phoneModel = "",
-                    phoneColor = "",
-                    storageCapacity = "",
-                    price = ""
-                )
-
-                // Log the selected brand
-                Log.d("BrandSelectionActivity2", "Saving brand: $brand")
-
-                // Save the phone details to the database
-                phoneDao.insertPhone(phone)
-            } else {
-                // Log if the brand already exists
-                Log.d("BrandSelectionActivity2", "Brand already exists in the database: $brand")
-            }
-        }
-    }
-
-
 }

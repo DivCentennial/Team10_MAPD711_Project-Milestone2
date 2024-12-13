@@ -12,14 +12,21 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.divyanshoo.team10_mapd711_project_milestone2.R
+import com.divyanshoo.team10_mapd711_project_milestone2.viewmodel.PaymentInfoViewModel
+import com.divyanshoo.team10_mapd711_project_milestone2.viewmodel.PaymentInfoViewModelFactory
 
 class PaymentInfoActivity7 : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private val paymentInfoViewModel: PaymentInfoViewModel by viewModels {
+        PaymentInfoViewModelFactory()
+    }
 
-                super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment_info7)
 
         val paymentMethodRadioGroup: RadioGroup = findViewById(R.id.paymentMethodRadioGroup)
@@ -35,12 +42,9 @@ class PaymentInfoActivity7 : AppCompatActivity() {
         cardHolderNameEditText.visibility = View.GONE
         cvvEditText.visibility = View.GONE
 
-        // Show or hide fields based on the selected payment method
-        paymentMethodRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val selectedPaymentMethod: RadioButton = findViewById(checkedId)
-            val paymentMethodText = selectedPaymentMethod.text.toString()
-
-            if (paymentMethodText == "Credit Card 💳" || paymentMethodText == "Debit Card 💳") {
+        // Observe the LiveData from ViewModel
+        paymentInfoViewModel.cardDetailsVisible.observe(this, Observer { isVisible ->
+            if (isVisible) {
                 cardNumberEditText.visibility = View.VISIBLE
                 expiryDateEditText.visibility = View.VISIBLE
                 cardHolderNameEditText.visibility = View.VISIBLE
@@ -51,81 +55,73 @@ class PaymentInfoActivity7 : AppCompatActivity() {
                 cardHolderNameEditText.visibility = View.GONE
                 cvvEditText.visibility = View.GONE
             }
+        })
+
+        paymentInfoViewModel.validationError.observe(this, Observer { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // Show or hide fields based on the selected payment method
+        paymentMethodRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            val selectedPaymentMethod: RadioButton = findViewById(checkedId)
+            val paymentMethodText = selectedPaymentMethod.text.toString()
+            paymentInfoViewModel.updatePaymentMethod(paymentMethodText)
         }
 
-
-        // Set up submit button to handle the checkout process
         submitButton.setOnClickListener {
-            // Get the selected payment method
             val selectedPaymentMethodId = paymentMethodRadioGroup.checkedRadioButtonId
             val selectedPaymentMethod: RadioButton = findViewById(selectedPaymentMethodId)
             val paymentMethod = selectedPaymentMethod.text.toString()
-            val cardHolderNameEditText: EditText = findViewById(R.id.cardHolderNameEditText)
-            val cvvEditText: EditText = findViewById(R.id.cvvEditText)
 
+            // Get card details from EditText fields
+            val cardNumber = cardNumberEditText.text.toString()
+            val expiryDate = expiryDateEditText.text.toString()
+            val cardHolderName = cardHolderNameEditText.text.toString()
+            val cvv = cvvEditText.text.toString()
 
-            // Validate payment method
-            if (paymentMethod == "Credit Card 💳" || paymentMethod == "Debit Card 💳") {
-                // Get card details
-                val cardNumber = cardNumberEditText.text.toString()
-                val expiryDate = expiryDateEditText.text.toString()
-                val cardHolderName = cardHolderNameEditText.text.toString()
-                val cvv = cvvEditText.text.toString()
+            // Validate payment details using ViewModel
+            if (paymentInfoViewModel.validatePaymentInfo(paymentMethod, cardNumber, expiryDate, cardHolderName, cvv)) {
+                // Proceed with the checkout process
+                val customerName = intent.getStringExtra("fullName")
+                val streetName = intent.getStringExtra("streetName")
+                val city = intent.getStringExtra("city")
+                val postalCode = intent.getStringExtra("postalCode")
+                val deliveryAddress = "$streetName, $city, $postalCode"
+                val phoneBrand = intent.getStringExtra("SELECTED_BRAND")
+                val phoneModel = intent.getStringExtra("SELECTED_MODEL")
+                val phoneStorage = intent.getStringExtra("SELECTED_STORAGE")
+                val phoneColor = intent.getStringExtra("SELECTED_COLOR")
+                val phonePrice = intent.getStringExtra("SELECTED_PRICE")
+                val email = intent.getStringExtra("email")
+                val phone = intent.getStringExtra("phone")
+                val deliveryType = intent.getStringExtra("DELIVERY_TYPE")
+                val campusName = intent.getStringExtra("CAMPUS_NAME")
 
-                // Validate card details
-                if (cardNumber.isEmpty() || expiryDate.isEmpty() || cardHolderName.isEmpty() || cvv.isEmpty()) {
-                    Toast.makeText(this, "Please fill in all card details.", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
+                // Create an Intent to navigate to OrderConfirmation8
+                val intent = Intent(this, OrderConfirmation8::class.java)
+
+                // Passing data via Intent
+                intent.putExtra("SELECTED_BRAND", phoneBrand)
+                intent.putExtra("phoneModel", phoneModel)
+                intent.putExtra("phonePrice", phonePrice)
+                intent.putExtra("phoneStorage", phoneStorage)
+                intent.putExtra("phoneColor", phoneColor)
+                intent.putExtra("customerName", customerName)
+                intent.putExtra("deliveryAddress", deliveryAddress)
+                intent.putExtra("email", email)
+                intent.putExtra("phone", phone)
+                intent.putExtra("paymentMethod", paymentMethod)
+                intent.putExtra("DELIVERY_TYPE", deliveryType)
+                intent.putExtra("CAMPUS_NAME", campusName)
+
+                // Start the OrderConfirmation8 activity
+                startActivity(intent)
+
+                // Show a success message
+                Toast.makeText(this, "Payment Successful!", Toast.LENGTH_SHORT).show()
             }
-
-            // Retrieve the passed data
-            val customerName = intent.getStringExtra("fullName")
-            val streetName = intent.getStringExtra("streetName")
-            val city = intent.getStringExtra("city")
-            val postalCode = intent.getStringExtra("postalCode")
-            val deliveryAddress = "$streetName, $city, $postalCode"
-            val phoneBrand = intent.getStringExtra("SELECTED_BRAND")
-            val phoneModel = intent.getStringExtra("SELECTED_MODEL")
-            val phoneStorage = intent.getStringExtra("SELECTED_STORAGE")
-            val phoneColor = intent.getStringExtra("SELECTED_COLOR")
-            val phonePrice = intent.getStringExtra("SELECTED_PRICE")
-            val email = intent.getStringExtra("email")
-            val phone = intent.getStringExtra("phone")
-            val deliveryType = intent.getStringExtra("DELIVERY_TYPE") // Ensure these are passed
-            val campusName = intent.getStringExtra("CAMPUS_NAME")     // Ensure these are passed
-
-            // Log the values to verify if they are passed correctly
-            Log.d("PaymentInfoActivity7", "Brand: $phoneBrand")
-            Log.d("PaymentInfoActivity7", "Model: $phoneModel")
-            Log.d("PaymentInfoActivity7", "Storage: $phoneStorage")
-            Log.d("PaymentInfoActivity7", "Color: $phoneColor")
-            Log.d("PaymentInfoActivity7", "Price: $phonePrice")
-
-            // Create an Intent to navigate to OrderConfirmation8
-            val intent = Intent(this, OrderConfirmation8::class.java)
-
-            // Passing data via Intent
-            intent.putExtra("SELECTED_BRAND", phoneBrand)
-            intent.putExtra("phoneModel", phoneModel)
-            intent.putExtra("phonePrice", phonePrice)
-            intent.putExtra("phoneStorage", phoneStorage)
-            intent.putExtra("phoneColor", phoneColor)
-            intent.putExtra("customerName", customerName)
-            intent.putExtra("deliveryAddress", deliveryAddress)
-            intent.putExtra("email", email)
-            intent.putExtra("phone", phone)
-            intent.putExtra("paymentMethod", paymentMethod)
-            intent.putExtra("DELIVERY_TYPE", deliveryType) // Pass these values
-            intent.putExtra("CAMPUS_NAME", campusName)     // Pass these values
-
-            // Start the OrderConfirmation8 activity
-            startActivity(intent)
-
-            // Show a success message
-            Toast.makeText(this, "Payment Successful!", Toast.LENGTH_SHORT).show()
         }
-
-
     }
 }

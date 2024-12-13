@@ -72,7 +72,7 @@ class RegisterActivity : AppCompatActivity() {
                             postalCode = postalCode
                         )
 
-                        database.userDao().insertUser(user)
+                        database.userDao().insertOrUpdateUser(user)
 
                         runOnUiThread {
                             Toast.makeText(this@RegisterActivity, "Registration successful!", Toast.LENGTH_SHORT).show()
