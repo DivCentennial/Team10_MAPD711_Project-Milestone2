@@ -33,6 +33,7 @@ class OrderConfirmationViewModel(
     fun fetchOrderDetails(phoneProductId: UUID, paymentMethod: String, deliveryType: String, campusName: String?, phoneBrand: String, phoneModel: String, phonePrice: String, phoneStorage: String, phoneColor: String) {
         viewModelScope.launch {
             try {
+                Log.d("OrderConfirmationVM", "Fetching order details for product ID: $phoneProductId")
                 val loggedInUser = getLoggedInUser()
                 val phone = getPhoneById(phoneProductId)
 
@@ -40,7 +41,7 @@ class OrderConfirmationViewModel(
                     _orderSummary.value = """
                         Brand: $phoneBrand
                         Model: $phoneModel
-                        Price: $phonePrice USD
+                        Price: $phonePrice CAD
                         Storage: $phoneStorage
                         Color: $phoneColor
                     """.trimIndent()
@@ -86,6 +87,7 @@ class OrderConfirmationViewModel(
 
             } catch (e: Exception) {
                 _error.value = "Error fetching order details: ${e.message}"
+                Log.e("OrderConfirmationVM", "Error fetching order details: ${e.message}")
             }
         }
     }
@@ -93,7 +95,10 @@ class OrderConfirmationViewModel(
     private suspend fun getLoggedInUser(): User? {
         return withContext(Dispatchers.IO) {
             val loggedInUserId = getLoggedInUserId()
-            userRepository.getUserById(loggedInUserId)
+            //userRepository.getUserById(loggedInUserId)
+            val user = userRepository.getUserById(loggedInUserId)
+            Log.d("OrderConfirmationVM", "Fetched user: $user")
+            return@withContext user
         }
     }
 

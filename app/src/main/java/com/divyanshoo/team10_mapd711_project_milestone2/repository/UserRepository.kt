@@ -19,8 +19,7 @@ class UserRepository(private val userDao: UserDao) {
 
     // Function to save a user
     suspend fun saveUser(user: User) {
-        // Use update instead of insert
-        userDao.updateUser(user)
+        userDao.insertOrUpdateUser(user) // Use insert instead of update for new user registration
     }
 
     // Method to get a user by ID
